@@ -79,7 +79,7 @@ const cards: Card[] = [
     id: 'entregas',
     title: 'Entregas, coletas e distribuição',
     description:
-      'Coletas programadas, entregas de mercadorias e distribuição para operações pontuais ou recorrentes.',
+      'Coletas programadas, entregas de mercadorias e distribuição para Manaus e todos os municípios do interior do Amazonas, em operações pontuais ou recorrentes.',
     benefit: 'Coletas e entregas organizadas conforme a sua rotina, sem mobilizar equipe própria.',
     items: ['Coletas programadas', 'Rotas pontuais ou recorrentes'],
     photo: photos.entregas,
@@ -123,6 +123,7 @@ const cards: Card[] = [
       {
         cards.map((c) => (
           <li class:list={['card', c.featured && 'card--featured']}>
+            {c.featured && (
             <Photo
               src={c.photo.src}
               alt={c.photo.alt}
@@ -134,6 +135,7 @@ const cards: Card[] = [
               placeholderIcon={c.icon === 'warehouse' ? 'camera' : c.icon}
               class="card__media"
             />
+            )}
             <div class="card__body">
               {c.featured && <span class="card__tag">Destaque</span>}
               <span class="card__icon">
@@ -268,6 +270,13 @@ const cards: Card[] = [
   }
   .card :global(.card__media) {
     border-radius: 0;
+  }
+  /* cards sem foto: ícone entra no fluxo do texto */
+  .card:not(.card--featured) .card__icon {
+    position: static;
+  }
+  .card:not(.card--featured) h3 {
+    margin-top: 1rem;
   }
   @media (min-width: 761px) {
     .card--featured {
