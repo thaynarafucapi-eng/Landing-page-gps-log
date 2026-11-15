@@ -1,0 +1,123 @@
+---
+/**
+ * Perguntas frequentes. Só entram respostas confirmadas pela GPSLOG.
+ * Também gera dados estruturados (FAQPage) para o Google.
+ */
+import Icon from './Icon.astro';
+import QuoteButton from './QuoteButton.astro';
+import { company } from '../config/site';
+
+const faqs = [
+  {
+    q: 'Vocês entregam em todos os municípios do interior do Amazonas?',
+    a: 'Sim. A GPSLOG atende todos os municípios do interior do Amazonas, por barco e por estrada, além de Manaus, da região metropolitana e de Roraima.',
+  },
+  {
+    q: 'Vocês atendem pessoa física?',
+    a: 'Sim. Atendemos pessoas físicas e empresas de todos os portes: comércios, distribuidoras, e-commerces, indústrias e operadores logísticos.',
+  },
+  {
+    q: 'Em quanto tempo recebo o orçamento?',
+    a: `O primeiro retorno acontece em ${company.firstResponse}, de segunda a sexta, das 8h às 17h. O prazo para enviar a proposta depende da complexidade da operação.`,
+  },
+  {
+    q: 'Vocês têm rastreamento da carga?',
+    a: 'Não oferecemos rastreamento online. Para saber o andamento da sua carga, é só falar com a nossa equipe pelo WhatsApp.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<section class="section faq" id="duvidas" aria-labelledby="faq-title">
+  <div class="container faq__grid">
+    <div>
+      <p class="eyebrow">Dúvidas frequentes</p>
+      <h2 id="faq-title">Perguntas que recebemos com frequência</h2>
+      <p class="lead">Não encontrou a sua dúvida? A nossa equipe responde pelo WhatsApp.</p>
+      <QuoteButton label="Tirar uma dúvida" variant="outline" size="sm" location="faq" />
+    </div>
+    <div class="faq__list">
+      {
+        faqs.map((f, i) => (
+          <details class="faq__item" open={i === 0}>
+            <summary>
+              <span>{f.q}</span>
+              <Icon name="arrow" size={18} class="faq__chevron" />
+            </summary>
+            <p>{f.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</section>
+
+<style>
+  .faq {
+    background: var(--gray-100);
+  }
+  .faq__grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .faq__grid .lead {
+    margin-bottom: 1.5rem;
+  }
+  .faq__list {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .faq__item {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+  }
+  .faq__item[open] {
+    border-left: 4px solid var(--red);
+  }
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq__item summary :global(.faq__chevron) {
+    flex: none;
+    color: var(--red);
+    transform: rotate(90deg);
+    transition: transform 0.2s ease;
+  }
+  .faq__item[open] summary :global(.faq__chevron) {
+    transform: rotate(-90deg);
+  }
+  .faq__item p {
+    margin: 0;
+    padding: 0 1.25rem 1.2rem;
+    color: var(--gray-600);
+  }
+  @media (max-width: 860px) {
+    .faq__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
