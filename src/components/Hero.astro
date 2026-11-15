@@ -6,20 +6,20 @@ import { company } from '../config/site';
 import { photos } from '../config/photos';
 
 const proof = [
-  { icon: 'warehouse', text: 'Armazenagem com controle de estoque' },
-  { icon: 'pin', text: 'Todo o interior do AM, por barco e estrada' },
   { icon: 'clock', text: `Retorno em ${company.firstResponse} úteis` },
+  { icon: 'warehouse', text: 'Armazenagem com controle de estoque' },
+  { icon: 'store', text: 'Montagem e positivação em pontos de venda' },
 ] as const;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__grid">
     <div class="hero__copy">
-      <p class="hero__kicker">Entregas em todo o interior do Amazonas, Manaus e Roraima</p>
-      <h1 id="hero-title">Soluções logísticas que movimentam o seu negócio.</h1>
+      <p class="hero__kicker">Transporte e logística · Manaus – AM</p>
+      <h1 id="hero-title">Entregas em todo o interior do Amazonas</h1>
       <p class="hero__sub">
-        Há {company.yearsInMarket} anos oferecendo soluções em transporte, armazenagem, entregas e logística
-        promocional, com agilidade e compromisso em cada operação.
+        Por barco e por estrada, para todos os municípios do interior, além de Manaus e Roraima. Há
+        {company.yearsInMarket} anos em transporte, armazenagem, montagem e logística promocional.
       </p>
       <div class="btn-row">
         <QuoteButton location="hero" />
@@ -44,6 +44,7 @@ const proof = [
         sizes="(max-width: 900px) 100vw, 560px"
         widths={[480, 768, 1080, 1448]}
         ratio="4 / 3"
+        position="30% center"
         priority
         placeholderLabel={photos.hero.pending}
       />

@@ -30,13 +30,13 @@ export const pdvGallery = [
 
 export const photos = {
   hero: {
-    src: armazemInterno,
-    alt: 'Área de armazenagem da GPSLOG com porta-paletes organizados e materiais identificados',
+    src: galpaoFachada,
+    alt: 'Fachada do galpão da GPSLOG, com a placa da empresa, no Conjunto Ben-Hur, em Manaus',
     pending: 'operação (hero)',
   },
   about: {
-    src: galpaoFachada,
-    alt: 'Fachada do galpão da GPSLOG no Conjunto Ben-Hur, em Manaus',
+    src: armazemInterno,
+    alt: 'Área de armazenagem da GPSLOG com porta-paletes e materiais organizados',
     pending: 'equipe ou fachada',
   },
   transporte: {
