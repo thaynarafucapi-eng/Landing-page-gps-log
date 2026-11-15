@@ -6,7 +6,7 @@ import { photos } from '../config/photos';
 const facts = [
   { value: String(company.foundingYear), label: 'Ano de fundação' },
   { value: `${company.yearsInMarket} anos`, label: 'De experiência em logística' },
-  { value: `${company.serviceArea.length} regiões`, label: 'Manaus e RM, interior do AM e Roraima' },
+  { value: 'Todo o Amazonas', label: 'Manaus, todos os municípios do interior e Roraima' },
 ];
 ---
 
@@ -74,6 +74,7 @@ const facts = [
   }
   .about__facts dd {
     margin: 0;
+    line-height: 1.12;
     order: -1;
     font-size: clamp(1.35rem, 2.6vw, 1.75rem);
     font-weight: 800;
