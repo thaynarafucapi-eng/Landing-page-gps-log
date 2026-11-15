@@ -145,8 +145,11 @@ const cards: Card[] = [
       }
     </ul>
 
-    <div class="all">
-      <h3 class="all__title">Todos os nossos serviços</h3>
+    <details class="all">
+      <summary class="all__title">
+        <span>Ver todos os nossos 16 serviços</span>
+        <Icon name="arrow" size={18} class="all__chevron" />
+      </summary>
       <div class="all__grid">
         {
           allServices.map((g) => (
@@ -164,11 +167,8 @@ const cards: Card[] = [
           ))
         }
       </div>
-      <div class="all__cta">
-        <p>Precisa de um serviço que não está na lista? Fale com a nossa equipe.</p>
-        <QuoteButton label="Falar com a equipe" variant="outline" size="sm" location="todos-servicos" />
-      </div>
-    </div>
+      <p class="all__note">Precisa de um serviço que não está na lista? Fale com a nossa equipe pelo WhatsApp.</p>
+    </details>
   </div>
 </section>
 
@@ -178,11 +178,40 @@ const cards: Card[] = [
     background: var(--white);
     border: 1px solid var(--gray-200);
     border-radius: var(--radius-lg);
-    padding: clamp(1.5rem, 3.5vw, 2.5rem);
+    padding: clamp(1.1rem, 2.5vw, 1.5rem) clamp(1.25rem, 3.5vw, 2rem);
   }
   .all__title {
-    font-size: 1.375rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 1.125rem;
+    font-weight: 750;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+  }
+  .all__title::-webkit-details-marker {
+    display: none;
+  }
+  .all__title :global(.all__chevron) {
+    flex: none;
+    color: var(--red);
+    transform: rotate(90deg);
+    transition: transform 0.2s ease;
+  }
+  .all[open] .all__title {
     margin-bottom: 1.5rem;
+  }
+  .all[open] .all__title :global(.all__chevron) {
+    transform: rotate(-90deg);
+  }
+  .all__note {
+    margin: 1.5rem 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--gray-200);
+    font-weight: 600;
+    color: var(--ink);
   }
   .all__grid {
     display: grid;
@@ -205,21 +234,6 @@ const cards: Card[] = [
   .all__group li {
     font-size: 0.9375rem;
     margin-bottom: 0.45rem;
-  }
-  .all__cta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 1.75rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--gray-200);
-  }
-  .all__cta p {
-    margin: 0;
-    font-weight: 600;
-    color: var(--ink);
   }
   @media (max-width: 1000px) {
     .all__grid {

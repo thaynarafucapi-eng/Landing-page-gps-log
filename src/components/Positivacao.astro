@@ -11,7 +11,7 @@ const steps = [
   { icon: 'tools', title: 'Montagem', text: 'Nossa equipe monta as estruturas e os móveis no ponto de venda.' },
   { icon: 'layout', title: 'Instalação', text: 'Posicionamos e fixamos os materiais conforme o projeto da campanha.' },
   { icon: 'layers', title: 'Organização', text: 'Deixamos o espaço organizado e pronto para receber o público.' },
-  { icon: 'undo', title: 'Retirada e retorno', text: 'Ao fim da ação, desmontamos, retiramos e levamos ao destino indicado.' },
+  { icon: 'undo', title: 'Negativação', text: 'Ao fim da ação, desmontamos, retiramos e levamos ao depósito ou destino indicado.' },
 ] as const;
 
 const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros estabelecimentos comerciais'];
@@ -28,25 +28,15 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
           estruturas promocionais a móveis e outros materiais. Você contrata um fornecedor só e recebe o espaço montado,
           instalado e organizado.
         </p>
-
-        <div class="posit__cols">
-          <div class="posit__col">
-            <h3>Positivação</h3>
-            <ul class="checklist">
-              <li>Coleta de móveis, estruturas e materiais</li>
-              <li>Transporte até o estabelecimento</li>
-              <li>Montagem e instalação</li>
-              <li>Organização dos materiais dentro da loja</li>
+        <div class="posit__bottom">
+          <div>
+            <p class="posit__venues-label">Atendemos operações em:</p>
+            <ul class="venues">
+              {venues.map((v) => <li>{v}</li>)}
             </ul>
           </div>
-          <div class="posit__col">
-            <h3>Negativação</h3>
-            <ul class="checklist">
-              <li>Retirada dos móveis e materiais</li>
-              <li>Desmontagem, quando necessária</li>
-              <li>Transporte de retorno</li>
-              <li>Entrega no depósito ou destino indicado</li>
-            </ul>
+          <div class="btn-row">
+            <QuoteButton service="positivacao" label="Solicitar orçamento para minha operação" location="positivacao" />
           </div>
         </div>
       </div>
@@ -99,22 +89,6 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
         ))
       }
     </ul>
-
-    <div class="posit__bottom">
-      <div>
-        <p class="posit__venues-label">Atendemos operações em:</p>
-        <ul class="venues">
-          {venues.map((v) => <li>{v}</li>)}
-        </ul>
-      </div>
-      <div class="btn-row">
-        <QuoteButton
-          service="positivacao"
-          label="Solicitar orçamento para minha operação"
-          location="positivacao"
-        />
-      </div>
-    </div>
   </div>
 </section>
 
@@ -137,28 +111,6 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
     grid-template-columns: 1.5fr 1fr;
     gap: clamp(2rem, 5vw, 4rem);
     align-items: start;
-  }
-  .posit__cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-  .posit__col {
-    background: var(--ink-800);
-    border: 1px solid #2c2f34;
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-  }
-  .posit__col h3 {
-    font-size: 1.125rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--red);
-    display: inline-block;
-  }
-  .posit__col li {
-    color: #dfe2e6;
-    font-size: 0.9875rem;
   }
   .posit__photo {
     margin: 0;
@@ -246,12 +198,9 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
   }
 
   .posit__bottom {
-    margin-top: 2.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: end;
-    justify-content: space-between;
-    gap: 1.5rem 2rem;
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.5rem;
   }
   .posit__venues-label {
     font-size: 0.875rem;
@@ -286,16 +235,18 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
     }
   }
   @media (max-width: 640px) {
-    .posit__cols {
-      grid-template-columns: 1fr;
-    }
     .steps {
       grid-template-columns: 1fr 1fr;
     }
   }
-  @media (max-width: 400px) {
+  @media (max-width: 340px) {
     .steps {
       grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 640px) {
+    .step {
+      padding: 1.1rem 0.9rem;
     }
   }
 </style>
