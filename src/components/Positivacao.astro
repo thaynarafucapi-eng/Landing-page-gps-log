@@ -2,7 +2,8 @@
 import Photo from './Photo.astro';
 import QuoteButton from './QuoteButton.astro';
 import Icon from './Icon.astro';
-import { photos } from '../config/photos';
+import { photos, pdvGallery } from '../config/photos';
+import { Picture } from 'astro:assets';
 
 const steps = [
   { icon: 'inbox', title: 'Coleta', text: 'Retiramos móveis, estruturas e materiais no local indicado.' },
@@ -78,6 +79,26 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
         ))
       }
     </ol>
+
+    <h3 class="posit__steps-title">Operações realizadas pela GPSLOG</h3>
+    <ul class="works">
+      {
+        pdvGallery.map((w) => (
+          <li class:list={['works__item', w.wide && 'works__item--wide']}>
+            <Picture
+              src={w.src}
+              alt={w.alt}
+              formats={['avif', 'webp']}
+              widths={w.wide ? [480, 800, w.src.width] : [300, w.src.width]}
+              sizes={w.wide ? '(max-width: 760px) 100vw, 420px' : '(max-width: 760px) 50vw, 210px'}
+              loading="lazy"
+              decoding="async"
+              quality={74}
+            />
+          </li>
+        ))
+      }
+    </ul>
 
     <div class="posit__bottom">
       <div>
@@ -192,6 +213,36 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
     line-height: 1.5;
     margin: 0;
     color: #aeb3ba;
+  }
+
+  .works {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 300px;
+    gap: 0.75rem;
+  }
+  .works__item {
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--ink-800);
+  }
+  .works__item--wide {
+    grid-column: span 2;
+  }
+  .works__item :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .works__item :global(picture) {
+    display: contents;
+  }
+  @media (max-width: 900px) {
+    .works {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 240px;
+    }
   }
 
   .posit__bottom {

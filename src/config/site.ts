@@ -69,10 +69,8 @@ export const clients = {
     { name: 'Pier Serv', logo: '/clientes/pierserv.webp' },
     { name: 'Profile Group', logo: '/clientes/profile.webp' },
   ],
-  /**
-   * Citados no briefing, sem logotipo na apresentação. Fora do site até decisão:
-   * Tradelog, Promolog, Cargopress, Acolher, Saggezza, USA Encomendas.
-   */
+  /** Parceiros sem logotipo disponível: aparecem só com o nome. */
+  names: ['Tradelog', 'Promolog', 'Cargopress', 'Acolher', 'Saggezza', 'USA Encomendas'],
 };
 
 /** Serviços: usados nos cards, no seletor do formulário e na mensagem do WhatsApp. */

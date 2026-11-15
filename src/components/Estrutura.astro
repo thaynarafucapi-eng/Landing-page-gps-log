@@ -8,8 +8,7 @@ const gallery = [
   { ...photos.fachada, caption: 'Galpão', icon: 'camera', span: 'wide' },
   { ...photos.veiculos, caption: 'Frota', icon: 'truck', span: '' },
   { ...photos.hero, caption: 'Armazenagem', icon: 'camera', span: '' },
-  { ...photos.equipe, caption: 'Equipe', icon: 'users', span: '' },
-  { ...photos.escritorio, caption: 'Administrativo', icon: 'camera', span: '' },
+  { ...photos.escritorio, caption: 'Administrativo', icon: 'camera', span: 'long' },
 ] as const;
 
 const pillars = [
@@ -128,6 +127,9 @@ const pillars = [
   .gallery__item--wide {
     grid-column: span 2;
     grid-row: span 2;
+  }
+  .gallery__item--long {
+    grid-column: span 2;
   }
   .gallery__caption {
     position: absolute;

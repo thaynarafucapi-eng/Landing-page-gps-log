@@ -26,6 +26,11 @@ const list = clients.list;
             </li>
           ))}
         </ul>
+        {clients.names.length > 0 && (
+          <p class="names">
+            Também atendemos: <strong>{clients.names.join(' · ')}</strong>
+          </p>
+        )}
       </div>
     </section>
   )
@@ -62,6 +67,15 @@ const list = clients.list;
     width: auto;
     height: auto;
     object-fit: contain;
+  }
+  .names {
+    margin: 1.75rem auto 0;
+    max-width: 760px;
+    text-align: center;
+    color: var(--gray-600);
+  }
+  .names strong {
+    color: var(--ink);
   }
   @media (max-width: 900px) {
     .logos {

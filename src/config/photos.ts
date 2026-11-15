@@ -11,8 +11,22 @@ import galpaoFachada from '../assets/fotos/galpao-fachada.jpg';
 import escritorio from '../assets/fotos/escritorio.jpg';
 import positivacaoPdv from '../assets/fotos/positivacao-pdv.jpg';
 import positivacaoPdv2 from '../assets/fotos/positivacao-pdv-2.jpg';
+import pdvZaad from '../assets/fotos/pdv-zaad.jpg';
+import pdvSkol from '../assets/fotos/pdv-skol.jpg';
+import pdvTrident from '../assets/fotos/pdv-trident.jpg';
+import pdvColgate from '../assets/fotos/pdv-colgate.jpg';
+import pdvHeineken from '../assets/fotos/pdv-heineken.jpg';
 
 type Slot = { src?: ImageMetadata; alt: string; pending: string };
+
+/** Operações em ponto de venda executadas pela GPSLOG (apresentação oficial, slides 7 e 8). */
+export const pdvGallery = [
+  { src: pdvSkol, alt: 'Container promocional Skol montado e instalado pela GPSLOG', wide: true },
+  { src: pdvZaad, alt: 'Expositor iluminado de lançamento Zaad instalado em loja pela GPSLOG' },
+  { src: pdvTrident, alt: 'Expositor Trident instalado pela GPSLOG em ponto de venda' },
+  { src: pdvColgate, alt: 'Ponta de gôndola Colgate-Palmolive montada pela GPSLOG em supermercado' },
+  { src: pdvHeineken, alt: 'Expositor refrigerado Heineken instalado pela GPSLOG' },
+];
 
 export const photos = {
   hero: {
