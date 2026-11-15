@@ -37,7 +37,7 @@ export const photos = {
   },
   armazenagem: {
     src: armazemOperacao,
-    alt: 'Materiais promocionais armazenados em porta-paletes e paletes em separação para expedição',
+    alt: 'Materiais armazenados em porta-paletes e paletes em separação para expedição',
     pending: 'armazenagem',
   },
   positivacao: {

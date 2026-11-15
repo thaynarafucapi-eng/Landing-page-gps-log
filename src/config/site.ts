@@ -80,7 +80,7 @@ export const clients = {
 export const services = [
   { id: 'transporte', label: 'Transporte de cargas' },
   { id: 'entregas', label: 'Entregas, coletas e distribuição' },
-  { id: 'armazenagem', label: 'Armazenagem de materiais promocionais' },
+  { id: 'armazenagem', label: 'Armazenagem de materiais' },
   { id: 'positivacao', label: 'Positivação e negativação' },
   { id: 'outro', label: 'Outro / não sei ainda' },
 ] as const;
