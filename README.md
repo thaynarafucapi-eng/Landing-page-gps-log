@@ -24,7 +24,6 @@ npm run preview  # serve o dist/ para conferência
 | --- | --- |
 | WhatsApp, Instagram, endereço, horário, slogan, áreas atendidas | `src/config/site.ts` |
 | Fotos de cada espaço do site | `src/config/photos.ts` (arquivos em `src/assets/fotos/`) |
-| Campos do formulário por serviço | `src/config/form.ts` |
 | Empresas atendidas (desligado até haver autorização) | `src/config/site.ts` → `clients.showClients` |
 | Textos de cada seção | `src/components/*.astro` |
 | Cores e tipografia | `src/styles/global.css` (variáveis no topo) |
@@ -42,8 +41,8 @@ A seção fica oculta. Depois da autorização por escrito de cada empresa, mude
 
 ## Formulário de orçamento
 
-- Etapa 1: nome, empresa (opcional), WhatsApp e serviço. Etapa 2: campos específicos do serviço escolhido.
-- Não há servidor. Ao enviar, o site monta uma mensagem organizada e abre o WhatsApp comercial com o texto pronto. A tela final avisa que o envio só se conclui quando o visitante toca em "Enviar" no WhatsApp. O site não exibe falsa confirmação de envio.
+- Etapa única: nome, empresa (opcional) e tipo de serviço. O número do cliente chega automaticamente pelo WhatsApp, e os detalhes da operação são combinados na conversa.
+- Não há servidor. Ao enviar, o site monta a mensagem e abre o WhatsApp comercial com o texto pronto. A tela final avisa que o envio só se conclui quando o visitante toca em "Enviar" no WhatsApp. O site não exibe falsa confirmação de envio.
 - Links de anúncios podem pré-selecionar o serviço: `?servico=transporte`, `entregas`, `armazenagem`, `positivacao` ou `outro`.
   Exemplo: `https://SEU-DOMINIO/?servico=positivacao#orcamento`.
 
@@ -60,7 +59,6 @@ Eventos enviados ao `dataLayer`:
 | --- | --- | --- |
 | `whatsapp_click` | Clique em qualquer botão de WhatsApp | `click_location` (hero, header, flutuante, positivacao, cta-final, footer...) |
 | `quote_cta_click` | Clique em "Solicitar orçamento" | `click_location`, `service` |
-| `form_step1_complete` | Etapa 1 do formulário concluída | `service` |
 | `generate_lead` | Formulário enviado ao WhatsApp | `service`, `method` |
 
 Configurados direto (sem GTM), `whatsapp_click` dispara `Contact` no Pixel e a conversão `PUBLIC_GADS_LABEL_WHATSAPP`. `generate_lead` dispara `Lead` no Pixel e a conversão `PUBLIC_GADS_LABEL_FORM`.

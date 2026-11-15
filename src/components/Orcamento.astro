@@ -1,14 +1,14 @@
 ---
 /**
- * Formulário de orçamento em 2 etapas.
- * Não há backend: ao enviar, os dados são organizados em uma mensagem e o
- * WhatsApp comercial é aberto com o texto pronto. O envio só se conclui
- * quando o visitante toca em "Enviar" no WhatsApp — e o site diz isso.
+ * Formulário de orçamento em etapa única: nome, empresa (opcional) e serviço.
+ * Não há backend: ao enviar, o WhatsApp comercial abre com a mensagem pronta,
+ * e os detalhes da operação são combinados na conversa. O número do cliente
+ * chega automaticamente pelo WhatsApp, por isso não é pedido aqui.
+ * O envio só se conclui quando o visitante toca em "Enviar" no WhatsApp.
  */
 import Icon from './Icon.astro';
 import WhatsAppButton from './WhatsAppButton.astro';
 import { company, contact, services } from '../config/site';
-import { stepTwoFields } from '../config/form';
 ---
 
 <section class="section quote" id="orcamento" aria-labelledby="orcamento-title">
@@ -17,13 +17,13 @@ import { stepTwoFields } from '../config/form';
       <p class="eyebrow">Solicitar orçamento</p>
       <h2 id="orcamento-title">Conte o que você precisa. Nós organizamos a operação.</h2>
       <p class="lead">
-        Leva menos de um minuto. Ao concluir, a sua solicitação abre no nosso WhatsApp comercial já organizada para a
-        equipe.
+        Leva poucos segundos. Ao concluir, a sua solicitação abre no nosso WhatsApp comercial e os detalhes da operação
+        são combinados direto com a equipe.
       </p>
       <ul class="quote__steps">
-        <li><span>1</span> Preencha os dados básicos e escolha o serviço</li>
-        <li><span>2</span> Informe os detalhes da operação, só o que souber</li>
-        <li><span>3</span> Envie pelo WhatsApp e receba o retorno da equipe</li>
+        <li><span>1</span> Informe seu nome e escolha o serviço</li>
+        <li><span>2</span> Envie pelo WhatsApp</li>
+        <li><span>3</span> Combine os detalhes com a nossa equipe</li>
       </ul>
       <div class="quote__info">
         <p><Icon name="clock" size={18} /> <span>{company.hours.label}</span></p>
@@ -43,39 +43,18 @@ import { stepTwoFields } from '../config/form';
       </noscript>
 
       <form class="qf" id="quote-form" novalidate data-quote-form>
-        <div class="qf__progress" aria-hidden="true">
-          <span class="qf__bar" data-progress></span>
-        </div>
-        <p class="qf__stepline" aria-live="polite" data-step-label>Etapa 1 de 2 · Dados básicos</p>
-
-        <!-- ETAPA 1 -->
         <fieldset class="qf__step" data-step="1">
-          <legend class="sr-only">Etapa 1: dados básicos</legend>
-
-          <div class="field">
-            <label for="qf-nome">Nome <span class="req" aria-hidden="true">*</span></label>
-            <input id="qf-nome" name="nome" type="text" autocomplete="name" required minlength="2" />
-            <p class="field__error" id="qf-nome-err" data-error-for="qf-nome"></p>
-          </div>
+          <legend class="sr-only">Solicitação de orçamento</legend>
 
           <div class="field-row">
             <div class="field">
-              <label for="qf-empresa">Empresa <span class="opt">(opcional)</span></label>
-              <input id="qf-empresa" name="empresa" type="text" autocomplete="organization" />
+              <label for="qf-nome">Nome <span class="req" aria-hidden="true">*</span></label>
+              <input id="qf-nome" name="nome" type="text" autocomplete="name" required minlength="2" />
+              <p class="field__error" data-error-for="qf-nome"></p>
             </div>
             <div class="field">
-              <label for="qf-whatsapp">WhatsApp <span class="req" aria-hidden="true">*</span></label>
-              <input
-                id="qf-whatsapp"
-                name="whatsapp"
-                type="tel"
-                inputmode="tel"
-                autocomplete="tel-national"
-                placeholder="(92) 90000-0000"
-                required
-                data-phone
-              />
-              <p class="field__error" id="qf-whatsapp-err" data-error-for="qf-whatsapp"></p>
+              <label for="qf-empresa">Empresa <span class="opt">(opcional)</span></label>
+              <input id="qf-empresa" name="empresa" type="text" autocomplete="organization" />
             </div>
           </div>
 
@@ -94,75 +73,11 @@ import { stepTwoFields } from '../config/form';
             <p class="field__error" id="qf-servico-err" data-error-for="servico"></p>
           </div>
 
-          <button type="button" class="btn btn--block" data-next>
-            Continuar <Icon name="arrow" />
-          </button>
-        </fieldset>
-
-        <!-- ETAPA 2 -->
-        <fieldset class="qf__step" data-step="2" hidden>
-          <legend class="sr-only">Etapa 2: informações da operação</legend>
-
-          {
-            Object.entries(stepTwoFields).map(([serviceId, cfg]) => (
-              <div class="qf__group" data-group={serviceId} hidden>
-                <p class="qf__intro">{cfg.intro}</p>
-                <div class="qf__fields">
-                  {cfg.fields.map((f) => {
-                    const id = `qf-${serviceId}-${f.name}`;
-                    const fieldName = `${serviceId}__${f.name}`;
-                    return (
-                      <div class:list={['field', f.half && 'field--half']}>
-                        <label for={id}>
-                          {f.label}{' '}
-                          {f.required ? (
-                            <span class="req" aria-hidden="true">*</span>
-                          ) : (
-                            <span class="opt">(opcional)</span>
-                          )}
-                        </label>
-                        {f.type === 'select' ? (
-                          <select id={id} name={fieldName} required={f.required} disabled data-label={f.label}>
-                            <option value="">Selecione</option>
-                            {f.options?.map((o) => (
-                              <option value={o}>{o}</option>
-                            ))}
-                          </select>
-                        ) : f.type === 'textarea' ? (
-                          <textarea id={id} name={fieldName} rows="3" required={f.required} placeholder={f.placeholder} disabled data-label={f.label} />
-                        ) : (
-                          <input
-                            id={id}
-                            name={fieldName}
-                            type={f.type}
-                            inputmode={f.type === 'number' ? 'numeric' : undefined}
-                            min={f.type === 'number' ? '0' : undefined}
-                            required={f.required}
-                            placeholder={f.placeholder}
-                            disabled
-                            data-label={f.label}
-                          />
-                        )}
-                        {f.hint && <p class="field__hint">{f.hint}</p>}
-                        <p class="field__error" data-error-for={id} />
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))
-          }
-
           <p class="qf__hours" data-hours-note></p>
 
-          <div class="qf__actions">
-            <button type="button" class="btn btn--outline" data-back>
-              <Icon name="arrowLeft" /> Voltar
-            </button>
-            <button type="submit" class="btn btn--wa">
-              <Icon name="whatsapp" /> Enviar pelo WhatsApp
-            </button>
-          </div>
+          <button type="submit" class="btn btn--wa btn--block">
+            <Icon name="whatsapp" /> Enviar pelo WhatsApp
+          </button>
           <p class="qf__legal">
             Seus dados são usados apenas para responder a esta solicitação.
             <a href="/privacidade/">Política de privacidade</a>.
@@ -254,51 +169,11 @@ import { stepTwoFields } from '../config/form';
   }
 
   /* ---------- Formulário ---------- */
-  .qf__progress {
-    height: 4px;
-    background: var(--gray-200);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .qf__bar {
-    display: block;
-    height: 100%;
-    width: 50%;
-    background: var(--red);
-    transition: width 0.3s ease;
-  }
-  .qf__stepline {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--gray-500);
-    margin: 0.75rem 0 1.25rem;
-  }
   .qf__step {
     border: 0;
     padding: 0;
     margin: 0;
     min-width: 0;
-  }
-  .qf__intro {
-    font-size: 0.9375rem;
-    color: var(--gray-600);
-    background: var(--gray-100);
-    border-left: 3px solid var(--red);
-    padding: 0.7rem 0.9rem;
-  }
-  .qf__fields {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 1rem;
-  }
-  .qf__fields > .field {
-    flex: 1 1 100%;
-  }
-  .qf__fields > .field--half {
-    flex: 1 1 calc(50% - 0.5rem);
-    min-width: 200px;
   }
   .field-row {
     display: grid;
@@ -359,11 +234,6 @@ import { stepTwoFields } from '../config/form';
   .field [aria-invalid='true'] {
     border-color: var(--red);
     box-shadow: 0 0 0 3px rgb(215 0 21 / 0.12);
-  }
-  .field__hint {
-    font-size: 0.8125rem;
-    color: var(--gray-500);
-    margin: 0.3rem 0 0;
   }
   .field__error {
     font-size: 0.875rem;
@@ -429,11 +299,6 @@ import { stepTwoFields } from '../config/form';
   }
   .qf__hours:empty {
     display: none;
-  }
-  .qf__actions {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.75rem;
   }
   .qf__legal {
     font-size: 0.8125rem;

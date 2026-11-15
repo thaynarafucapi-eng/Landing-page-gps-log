@@ -40,12 +40,6 @@ export function trackQuoteCta(location: string, service?: string) {
   push('quote_cta_click', { click_location: location, service: service ?? '' });
 }
 
-/** Etapa 1 concluída. */
-export function trackFormStep(service: string) {
-  push('form_step1_complete', { service });
-  window.gtag?.('event', 'form_step1_complete', { service });
-}
-
 /** Formulário enviado para o WhatsApp (conversão principal do formulário). */
 export function trackLead(service: string) {
   push('generate_lead', { service, method: 'whatsapp_form' });
