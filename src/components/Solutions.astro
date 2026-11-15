@@ -17,7 +17,7 @@ type Card = {
   benefit: string;
   items: string[];
   photo: (typeof photos)[keyof typeof photos];
-  icon: 'store' | 'truck' | 'route' | 'warehouse';
+  icon: 'store' | 'truck' | 'route' | 'warehouse' | 'tools';
   detailsHref?: string;
   featured?: boolean;
 };
@@ -27,7 +27,7 @@ const cards: Card[] = [
     id: 'positivacao',
     title: 'Positivação e negativação',
     description:
-      'Coletamos, transportamos, montamos, instalamos e organizamos móveis e materiais promocionais no ponto de venda. Depois, retiramos e devolvemos.',
+      'Coletamos, transportamos, montamos, instalamos e organizamos móveis, estruturas e materiais no ponto de venda. Depois, retiramos e devolvemos.',
     benefit: 'Um único fornecedor para toda a ação no ponto de venda.',
     items: ['Lojas, shoppings e atacadões', 'Drogarias e comércio em geral'],
     photo: photos.positivacao,
@@ -67,6 +67,16 @@ const cards: Card[] = [
     icon: 'warehouse',
     detailsHref: '#armazenagem',
   },
+  {
+    id: 'montagem',
+    title: 'Montagem e instalação',
+    description:
+      'Montamos e instalamos móveis, estruturas e materiais onde você precisar: empresas, lojas, eventos e residências.',
+    benefit: 'Do transporte à instalação, com uma única equipe.',
+    items: ['Coleta, transporte e montagem no local', 'Desmontagem e retirada, quando necessário'],
+    photo: photos.montagem,
+    icon: 'tools',
+  },
 ];
 ---
 
@@ -76,7 +86,7 @@ const cards: Card[] = [
       <p class="eyebrow">Nossas soluções</p>
       <h2 id="solucoes-title">Do transporte à instalação no ponto de venda</h2>
       <p class="lead">
-        Quatro frentes que funcionam sozinhas ou integradas, com uma única equipe responsável pela sua operação.
+        Cinco frentes que funcionam sozinhas ou integradas, com uma única equipe responsável pela sua operação.
       </p>
     </div>
 
@@ -87,7 +97,7 @@ const cards: Card[] = [
             <Photo
               src={c.photo.src}
               alt={c.photo.alt}
-              sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 380px"
+              sizes={c.featured ? '(max-width: 760px) 100vw, 540px' : '(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 560px'}
               widths={[400, 640, 900]}
               ratio="16 / 10"
               position={c.id === 'positivacao' ? 'center 40%' : 'center'}
@@ -146,6 +156,30 @@ const cards: Card[] = [
   }
   .card :global(.card__media) {
     border-radius: 0;
+  }
+  @media (min-width: 761px) {
+    .card--featured {
+      grid-column: 1 / -1;
+      flex-direction: row;
+    }
+    .card--featured :global(.card__media) {
+      flex: 0 0 46%;
+      aspect-ratio: auto !important;
+      min-height: 340px;
+    }
+    .card--featured :global(.card__media img) {
+      position: absolute;
+      inset: 0;
+    }
+    .card--featured .card__body {
+      padding: 2rem 2.25rem;
+    }
+    .card--featured .card__icon {
+      position: static;
+    }
+    .card--featured h3 {
+      margin-top: 1rem;
+    }
   }
   .card__body {
     position: relative;

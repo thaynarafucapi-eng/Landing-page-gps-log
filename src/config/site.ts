@@ -82,6 +82,7 @@ export const services = [
   { id: 'entregas', label: 'Entregas, coletas e distribuição' },
   { id: 'armazenagem', label: 'Armazenagem de materiais' },
   { id: 'positivacao', label: 'Positivação e negativação' },
+  { id: 'montagem', label: 'Montagem e instalação' },
   { id: 'outro', label: 'Outro / não sei ainda' },
 ] as const;
 
