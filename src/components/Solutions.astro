@@ -22,6 +22,35 @@ type Card = {
   featured?: boolean;
 };
 
+/** Lista completa, conforme o slide "Nossos Serviços" da apresentação oficial. */
+const allServices = [
+  {
+    group: 'Transporte',
+    icon: 'truck',
+    items: [
+      'Carga expressa',
+      'Carga aérea normal',
+      'Carga aérea emergencial',
+      'Cross docking',
+      'Coleta e distribuição',
+      'Transferência de material',
+      'Logística reversa',
+    ],
+  },
+  { group: 'Armazenagem', icon: 'warehouse', items: ['Armazenagem logística', 'Inventário', 'Montagem de kits'] },
+  {
+    group: 'Ponto de venda e promoções',
+    icon: 'store',
+    items: [
+      'Positivação e negativação',
+      'Ações em ponto de venda (PDV)',
+      'Campanhas promocionais',
+      'Ações de incentivo (prêmios)',
+    ],
+  },
+  { group: 'Outros serviços', icon: 'layers', items: ['Serviço hot line', 'Transferência de notas fiscais'] },
+] as const;
+
 const cards: Card[] = [
   {
     id: 'positivacao',
@@ -133,10 +162,93 @@ const cards: Card[] = [
         ))
       }
     </ul>
+
+    <div class="all">
+      <h3 class="all__title">Todos os nossos serviços</h3>
+      <div class="all__grid">
+        {
+          allServices.map((g) => (
+            <div class="all__group">
+              <h4>
+                <Icon name={g.icon} size={20} />
+                {g.group}
+              </h4>
+              <ul class="checklist">
+                {g.items.map((i) => (
+                  <li>{i}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+      <div class="all__cta">
+        <p>Precisa de um serviço que não está na lista? Fale com a nossa equipe.</p>
+        <QuoteButton label="Falar com a equipe" variant="outline" size="sm" location="todos-servicos" />
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
+  .all {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  }
+  .all__title {
+    font-size: 1.375rem;
+    margin-bottom: 1.5rem;
+  }
+  .all__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem 2rem;
+  }
+  .all__group h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.9rem;
+    border-bottom: 2px solid var(--red);
+  }
+  .all__group h4 :global(svg) {
+    color: var(--red);
+    flex: none;
+  }
+  .all__group li {
+    font-size: 0.9375rem;
+    margin-bottom: 0.45rem;
+  }
+  .all__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gray-200);
+  }
+  .all__cta p {
+    margin: 0;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  @media (max-width: 1000px) {
+    .all__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .all__grid {
+      grid-template-columns: 1fr;
+    }
+  }
   .cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

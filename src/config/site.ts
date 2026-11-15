@@ -58,22 +58,21 @@ export const mapsLinkUrl = `https://www.google.com/maps/search/?api=1&query=${en
  * Para usar logotipos, salve em /public/clientes/ e preencha `logo`.
  */
 export const clients = {
-  showClients: false,
+  showClients: true,
+  /** Parceiros com autorização de divulgação (logotipos extraídos da apresentação oficial). */
   list: [
-    { name: 'Mundial Logistics', logo: '' },
-    { name: 'LS Logística', logo: '' },
-    { name: 'Viena Logística', logo: '' },
-    { name: 'Profile', logo: '' },
-    { name: 'Tradelog', logo: '' },
-    { name: 'Promolog', logo: '' },
-    { name: 'Pierserv', logo: '' },
-    { name: 'Cargopress', logo: '' },
-    { name: 'CLI', logo: '' },
-    { name: 'Acolher', logo: '' },
-    { name: 'Saggezza', logo: '' },
-    { name: 'USA Encomendas', logo: '' },
-    { name: 'Brasilmax', logo: '' },
+    { name: 'Mundial Logistics Group', logo: '/clientes/mundial-logistics.webp' },
+    { name: 'Vienalog Logística Promocional', logo: '/clientes/vienalog.webp' },
+    { name: 'Brasil Maxi Logística', logo: '/clientes/brasilmaxi.webp' },
+    { name: 'CLI Central de Logística Integrada', logo: '/clientes/cli.webp' },
+    { name: 'LSLog Logística Promocional', logo: '/clientes/lslog.webp' },
+    { name: 'Pier Serv', logo: '/clientes/pierserv.webp' },
+    { name: 'Profile Group', logo: '/clientes/profile.webp' },
   ],
+  /**
+   * Citados no briefing, sem logotipo na apresentação. Fora do site até decisão:
+   * Tradelog, Promolog, Cargopress, Acolher, Saggezza, USA Encomendas.
+   */
 };
 
 /** Serviços: usados nos cards, no seletor do formulário e na mensagem do WhatsApp. */
