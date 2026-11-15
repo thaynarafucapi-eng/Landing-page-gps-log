@@ -10,6 +10,7 @@ import armazemOperacao from '../assets/fotos/armazem-operacao.jpg';
 import galpaoFachada from '../assets/fotos/galpao-fachada.jpg';
 import escritorio from '../assets/fotos/escritorio.jpg';
 import positivacaoPdv from '../assets/fotos/positivacao-pdv.jpg';
+import positivacaoPdv2 from '../assets/fotos/positivacao-pdv-2.jpg';
 
 type Slot = { src?: ImageMetadata; alt: string; pending: string };
 
@@ -43,6 +44,11 @@ export const photos = {
     src: positivacaoPdv,
     alt: 'Estrutura promocional montada e instalada pela GPSLOG em ponto de venda de atacado',
     pending: 'positivação em PDV',
+  },
+  positivacaoDestaque: {
+    src: positivacaoPdv2,
+    alt: 'Estrutura promocional temática montada e instalada pela GPSLOG em ponto de venda de atacado',
+    pending: 'positivação em PDV (destaque)',
   },
   veiculos: {
     src: undefined,
