@@ -93,6 +93,5 @@ export const tracking = {
   ga4Id: import.meta.env.PUBLIC_GA4_ID ?? '',
   googleAdsId: import.meta.env.PUBLIC_GADS_ID ?? '',
   googleAdsLabelWhatsapp: import.meta.env.PUBLIC_GADS_LABEL_WHATSAPP ?? '',
-  googleAdsLabelForm: import.meta.env.PUBLIC_GADS_LABEL_FORM ?? '',
   metaPixelId: import.meta.env.PUBLIC_META_PIXEL_ID ?? '',
 };

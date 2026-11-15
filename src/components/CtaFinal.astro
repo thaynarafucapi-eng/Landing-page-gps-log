@@ -1,10 +1,9 @@
 ---
-import QuoteButton from './QuoteButton.astro';
 import WhatsAppButton from './WhatsAppButton.astro';
-import { company } from '../config/site';
+import { company, contact } from '../config/site';
 ---
 
-<section class="cta" aria-labelledby="cta-title">
+<section class="cta" id="contato" aria-labelledby="cta-title">
   <div class="container cta__inner">
     <svg class="cta__squares" viewBox="0 0 120 120" aria-hidden="true">
       <rect x="6" y="6" width="62" height="62" />
@@ -19,8 +18,8 @@ import { company } from '../config/site';
       <p class="cta__meta">{company.hours.label} · Primeiro retorno em {company.firstResponse}</p>
     </div>
     <div class="cta__actions">
-      <QuoteButton location="cta-final" variant="outline-light" />
-      <WhatsAppButton location="cta-final" />
+      <WhatsAppButton label="Solicitar orçamento pelo WhatsApp" location="cta-final" />
+      <p class="cta__phone">ou chame no {contact.whatsappDisplay}</p>
     </div>
   </div>
 </section>
@@ -74,7 +73,14 @@ import { company } from '../config/site';
     gap: 0.75rem;
     min-width: min(100%, 300px);
   }
-  .cta__actions :global(.btn--outline-light) {
-    border-color: var(--white);
+  .cta__actions :global(.btn) {
+    min-height: 58px;
+    font-size: 1.0625rem;
+    box-shadow: 0 6px 18px rgb(0 0 0 / 0.18);
+  }
+  .cta__phone {
+    margin: 0;
+    text-align: center;
+    font-size: 0.9375rem !important;
   }
 </style>

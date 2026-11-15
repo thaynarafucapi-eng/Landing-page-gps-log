@@ -24,6 +24,7 @@ npm run preview  # serve o dist/ para conferência
 | --- | --- |
 | WhatsApp, Instagram, endereço, horário, slogan, áreas atendidas | `src/config/site.ts` |
 | Fotos de cada espaço do site | `src/config/photos.ts` (arquivos em `src/assets/fotos/`) |
+| Mensagens do WhatsApp | `src/config/site.ts` e `src/components/QuoteButton.astro` |
 | Empresas atendidas (desligado até haver autorização) | `src/config/site.ts` → `clients.showClients` |
 | Textos de cada seção | `src/components/*.astro` |
 | Cores e tipografia | `src/styles/global.css` (variáveis no topo) |
@@ -39,12 +40,9 @@ npm run preview  # serve o dist/ para conferência
 
 A seção fica oculta. Depois da autorização por escrito de cada empresa, mude `showClients` para `true`, remova da lista quem não autorizou e, se houver logotipos, salve em `public/clientes/` e informe o caminho em `logo`.
 
-## Formulário de orçamento
+## Conversão
 
-- Etapa única: nome, empresa (opcional) e tipo de serviço. O número do cliente chega automaticamente pelo WhatsApp, e os detalhes da operação são combinados na conversa.
-- Não há servidor. Ao enviar, o site monta a mensagem e abre o WhatsApp comercial com o texto pronto. A tela final avisa que o envio só se conclui quando o visitante toca em "Enviar" no WhatsApp. O site não exibe falsa confirmação de envio.
-- Links de anúncios podem pré-selecionar o serviço: `?servico=transporte`, `entregas`, `armazenagem`, `positivacao` ou `outro`.
-  Exemplo: `https://SEU-DOMINIO/?servico=positivacao#orcamento`.
+Todos os botões de contato abrem o WhatsApp comercial. Os botões "Solicitar orçamento" de cada serviço já enviam uma mensagem citando o serviço. Para mandar o visitante de um anúncio direto à seção do serviço, use âncoras: `#positivacao`, `#atuacao` (transporte), `#armazenagem`, `#solucoes`.
 
 ## Rastreamento (GA4, Google Tag Manager, Google Ads, Meta Pixel)
 
@@ -57,8 +55,6 @@ Eventos enviados ao `dataLayer`:
 
 | Evento | Quando | Parâmetros |
 | --- | --- | --- |
-| `whatsapp_click` | Clique em qualquer botão de WhatsApp | `click_location` (hero, header, flutuante, positivacao, cta-final, footer...) |
-| `quote_cta_click` | Clique em "Solicitar orçamento" | `click_location`, `service` |
-| `generate_lead` | Formulário enviado ao WhatsApp | `service`, `method` |
+| `whatsapp_click` | Clique em qualquer botão de WhatsApp ou "Solicitar orçamento" | `click_location` (hero, header, flutuante, card-positivacao, armazenagem, cta-final, footer...) |
 
-Configurados direto (sem GTM), `whatsapp_click` dispara `Contact` no Pixel e a conversão `PUBLIC_GADS_LABEL_WHATSAPP`. `generate_lead` dispara `Lead` no Pixel e a conversão `PUBLIC_GADS_LABEL_FORM`.
+Configurados direto (sem GTM), `whatsapp_click` dispara `Contact` no Pixel e a conversão `PUBLIC_GADS_LABEL_WHATSAPP`.

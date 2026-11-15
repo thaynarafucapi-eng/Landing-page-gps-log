@@ -1,7 +1,6 @@
 ---
 import Photo from './Photo.astro';
 import QuoteButton from './QuoteButton.astro';
-import WhatsAppButton from './WhatsAppButton.astro';
 import Icon from './Icon.astro';
 import { photos } from '../config/photos';
 
@@ -91,12 +90,6 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
           service="positivacao"
           label="Solicitar orçamento para minha operação"
           location="positivacao"
-        />
-        <WhatsAppButton
-          label="Tirar dúvidas no WhatsApp"
-          message="Olá! Conheci a GPSLOG pelo site e gostaria de um orçamento para uma operação de positivação/negativação."
-          location="positivacao"
-          variant="outline-light"
         />
       </div>
     </div>

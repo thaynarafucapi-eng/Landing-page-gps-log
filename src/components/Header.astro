@@ -7,7 +7,7 @@ const nav = [
   { href: '#positivacao', label: 'Positivação' },
   { href: '#atuacao', label: 'Área de atuação' },
   { href: '#estrutura', label: 'Estrutura' },
-  { href: '#orcamento', label: 'Orçamento' },
+  { href: '#contato', label: 'Contato' },
 ];
 ---
 
@@ -23,8 +23,15 @@ const nav = [
           <li><a href={item.href} data-menu-link>{item.label}</a></li>
         ))}
       </ul>
-      <a class="btn btn--sm header__cta-mobile" href="#orcamento" data-menu-link data-cta-location="menu">
-        Solicitar orçamento
+      <a
+        class="btn btn--sm btn--wa header__cta-mobile"
+        href={whatsappUrl()}
+        target="_blank"
+        rel="noopener"
+        data-menu-link
+        data-wa-location="menu"
+      >
+        <Icon name="whatsapp" /> Solicitar orçamento
       </a>
     </nav>
 

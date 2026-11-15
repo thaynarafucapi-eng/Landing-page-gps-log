@@ -1,10 +1,11 @@
 ---
 /**
- * Botão "Solicitar orçamento": rola até o formulário e, se informado,
- * já deixa o serviço selecionado. Funciona sem JavaScript (âncora + parâmetro).
+ * Botão "Solicitar orçamento": abre o WhatsApp comercial com uma mensagem
+ * que já cita o serviço, quando informado. Também é rastreado como clique
+ * de WhatsApp (`data-wa-location`).
  */
 import Icon from './Icon.astro';
-import type { ServiceId } from '../config/site';
+import { contact, services, whatsappUrl, type ServiceId } from '../config/site';
 
 interface Props {
   label?: string;
@@ -26,7 +27,11 @@ const {
   class: className,
 } = Astro.props;
 
-const href = service ? `?servico=${service}#orcamento` : '#orcamento';
+const serviceLabel = services.find((s) => s.id === service)?.label;
+const message = serviceLabel
+  ? `Olá! Conheci a GPSLOG pelo site e gostaria de solicitar um orçamento de ${serviceLabel.toLowerCase()}.`
+  : contact.whatsappDefaultMessage;
+
 const classes = [
   'btn',
   variant !== 'primary' && `btn--${variant}`,
@@ -38,7 +43,8 @@ const classes = [
   .join(' ');
 ---
 
-<a class={classes} href={href} data-quote-service={service} data-cta-location={location}>
+<a class={classes} href={whatsappUrl(message)} target="_blank" rel="noopener" data-wa-location={location}>
+  <Icon name="whatsapp" />
   <span>{label}</span>
-  <Icon name="arrow" />
+  <span class="sr-only">(abre o WhatsApp em nova aba)</span>
 </a>

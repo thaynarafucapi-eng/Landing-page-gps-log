@@ -1,7 +1,6 @@
 ---
 import Photo from './Photo.astro';
 import QuoteButton from './QuoteButton.astro';
-import WhatsAppButton from './WhatsAppButton.astro';
 import Icon from './Icon.astro';
 import { company } from '../config/site';
 import { photos } from '../config/photos';
@@ -24,11 +23,7 @@ const proof = [
       </p>
       <div class="btn-row">
         <QuoteButton location="hero" />
-        <WhatsAppButton
-          label="Falar com um especialista"
-          location="hero"
-          variant="outline"
-        />
+        <a class="btn btn--outline" href="#solucoes">Conhecer as soluções</a>
       </div>
       <ul class="hero__proof">
         {

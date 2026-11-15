@@ -14,7 +14,6 @@ declare global {
 
 const ADS_ID = import.meta.env.PUBLIC_GADS_ID ?? '';
 const ADS_LABEL_WA = import.meta.env.PUBLIC_GADS_LABEL_WHATSAPP ?? '';
-const ADS_LABEL_FORM = import.meta.env.PUBLIC_GADS_LABEL_FORM ?? '';
 
 function push(event: string, params: Record<string, unknown> = {}) {
   window.dataLayer = window.dataLayer || [];
@@ -33,17 +32,4 @@ export function trackWhatsappClick(location: string) {
   window.gtag?.('event', 'whatsapp_click', { click_location: location });
   adsConversion(ADS_LABEL_WA);
   window.fbq?.('track', 'Contact', { content_name: location });
-}
-
-/** Clique em "Solicitar orçamento" (intenção, não é conversão). */
-export function trackQuoteCta(location: string, service?: string) {
-  push('quote_cta_click', { click_location: location, service: service ?? '' });
-}
-
-/** Formulário enviado para o WhatsApp (conversão principal do formulário). */
-export function trackLead(service: string) {
-  push('generate_lead', { service, method: 'whatsapp_form' });
-  window.gtag?.('event', 'generate_lead', { service, method: 'whatsapp_form' });
-  adsConversion(ADS_LABEL_FORM);
-  window.fbq?.('track', 'Lead', { content_name: service });
 }
