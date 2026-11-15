@@ -14,8 +14,6 @@ type Card = {
   id: ServiceId;
   title: string;
   description: string;
-  benefit: string;
-  items: string[];
   photo: (typeof photos)[keyof typeof photos];
   icon: 'store' | 'truck' | 'route' | 'warehouse' | 'tools';
   detailsHref?: string;
@@ -57,8 +55,6 @@ const cards: Card[] = [
     title: 'Positivação e negativação',
     description:
       'Coletamos, transportamos, montamos, instalamos e organizamos móveis, estruturas e materiais no ponto de venda. Depois, retiramos e devolvemos.',
-    benefit: 'Um único fornecedor para toda a ação no ponto de venda.',
-    items: ['Lojas, shoppings e atacadões', 'Drogarias e comércio em geral'],
     photo: photos.positivacao,
     icon: 'store',
     detailsHref: '#positivacao',
@@ -69,8 +65,6 @@ const cards: Card[] = [
     title: 'Transporte de cargas',
     description:
       'Cargas fracionadas e fechadas, transporte expresso de mercadorias e envios aéreos por companhias parceiras.',
-    benefit: 'A modalidade certa para o prazo e o volume da sua carga.',
-    items: ['Fracionada, fechada e expressa', 'Aéreo por companhias parceiras'],
     photo: photos.transporte,
     icon: 'truck',
     detailsHref: '#atuacao',
@@ -80,8 +74,6 @@ const cards: Card[] = [
     title: 'Entregas, coletas e distribuição',
     description:
       'Coletas programadas, entregas de mercadorias e distribuição para Manaus e todos os municípios do interior do Amazonas, em operações pontuais ou recorrentes.',
-    benefit: 'Coletas e entregas organizadas conforme a sua rotina, sem mobilizar equipe própria.',
-    items: ['Coletas programadas', 'Rotas pontuais ou recorrentes'],
     photo: photos.entregas,
     icon: 'route',
   },
@@ -90,8 +82,6 @@ const cards: Card[] = [
     title: 'Armazenagem de materiais',
     description:
       'Recebemos, armazenamos, controlamos entradas e saídas, separamos e expedimos seus materiais conforme a sua solicitação.',
-    benefit: 'Seu material guardado, controlado e pronto para sair quando você pedir.',
-    items: ['Controle interno de estoque', 'Separação e expedição sob demanda'],
     photo: photos.armazenagem,
     icon: 'warehouse',
     detailsHref: '#armazenagem',
@@ -101,8 +91,6 @@ const cards: Card[] = [
     title: 'Montagem e instalação',
     description:
       'Montamos e instalamos móveis, estruturas e materiais onde você precisar: empresas, lojas, eventos e residências.',
-    benefit: 'Do transporte à instalação, com uma única equipe.',
-    items: ['Coleta, transporte e montagem no local', 'Desmontagem e retirada, quando necessário'],
     photo: photos.montagem,
     icon: 'tools',
   },
@@ -143,14 +131,6 @@ const cards: Card[] = [
               </span>
               <h3>{c.title}</h3>
               <p>{c.description}</p>
-              <ul class="checklist card__items">
-                {c.items.map((i) => (
-                  <li>{i}</li>
-                ))}
-              </ul>
-              <p class="card__benefit">
-                <strong>Benefício:</strong> {c.benefit}
-              </p>
               <div class="card__actions">
                 <QuoteButton service={c.id} size="sm" location={`card-${c.id}`} label="Solicitar orçamento" />
                 {c.detailsHref && (
@@ -340,22 +320,7 @@ const cards: Card[] = [
   }
   .card p {
     color: var(--gray-600);
-  }
-  .card__items {
-    margin: 0 0 1rem;
-    font-size: 0.9375rem;
-    font-weight: 600;
-    color: var(--ink);
-  }
-  .card__benefit {
-    font-size: 0.9375rem;
-    background: var(--gray-100);
-    border-left: 3px solid var(--ink);
-    padding: 0.7rem 0.9rem;
     margin-bottom: 1.5rem;
-  }
-  .card__benefit strong {
-    color: var(--ink);
   }
   .card__actions {
     margin-top: auto;

@@ -34,11 +34,6 @@ export const photos = {
     alt: 'Fachada do galpão da GPSLOG, com a placa da empresa, no Conjunto Ben-Hur, em Manaus',
     pending: 'operação (hero)',
   },
-  about: {
-    src: armazemInterno,
-    alt: 'Área de armazenagem da GPSLOG com porta-paletes e materiais organizados',
-    pending: 'equipe ou fachada',
-  },
   transporte: {
     src: undefined,
     alt: 'Veículo da GPSLOG em operação de transporte',

@@ -1,26 +1,15 @@
 ---
-import Photo from './Photo.astro';
 import { company } from '../config/site';
-import { photos } from '../config/photos';
 
 const facts = [
   { value: String(company.foundingYear), label: 'Ano de fundação' },
-  { value: `${company.yearsInMarket} anos`, label: 'De experiência em logística' },
+  { value: 'Barco e estrada', label: 'Para chegar a todo o interior' },
   { value: 'Todo o Amazonas', label: 'Manaus, todos os municípios do interior e Roraima' },
 ];
 ---
 
 <section class="section about" id="sobre" aria-labelledby="sobre-title">
   <div class="container about__grid">
-    <div class="about__media">
-      <Photo
-        src={photos.about.src}
-        alt={photos.about.alt}
-        sizes="(max-width: 900px) 100vw, 520px"
-        ratio="4 / 3"
-        placeholderLabel={photos.about.pending}
-      />
-    </div>
     <div>
       <p class="eyebrow">Sobre a GPSLOG</p>
       <h2 id="sobre-title">{company.slogan}</h2>
@@ -49,10 +38,7 @@ const facts = [
 
 <style>
   .about__grid {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: clamp(2rem, 5vw, 4.5rem);
-    align-items: center;
+    max-width: 900px;
   }
   .about__facts {
     display: grid;
