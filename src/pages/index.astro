@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Solutions from '../components/Solutions.astro';
+import Positivacao from '../components/Positivacao.astro';
+import Atuacao from '../components/Atuacao.astro';
+import Armazenagem from '../components/Armazenagem.astro';
+import Diferenciais from '../components/Diferenciais.astro';
+import Estrutura from '../components/Estrutura.astro';
+import Clientes from '../components/Clientes.astro';
+import Orcamento from '../components/Orcamento.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import { company } from '../config/site';
+
+const title = 'GPSLOG | Transporte e Logística em Manaus, Interior do AM e Roraima';
+const description = `Transporte de cargas, entregas, armazenagem de materiais promocionais e positivação em PDV. ${company.yearsInMarket} anos de experiência em Manaus. Solicite seu orçamento pelo WhatsApp.`;
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <main id="conteudo">
+    <Hero />
+    <Solutions />
+    <Positivacao />
+    <About />
+    <Atuacao />
+    <Armazenagem />
+    <Diferenciais />
+    <Estrutura />
+    <Clientes />
+    <Orcamento />
+    <CtaFinal />
+  </main>
+  <Footer />
+  <WhatsAppFloat />
+</Base>
+
+<script>
+  import '../scripts/main.ts';
+</script>

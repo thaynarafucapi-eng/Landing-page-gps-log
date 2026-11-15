@@ -1,0 +1,97 @@
+---
+import Photo from './Photo.astro';
+import { company } from '../config/site';
+import { photos } from '../config/photos';
+
+const facts = [
+  { value: String(company.foundingYear), label: 'Ano de fundação' },
+  { value: `${company.yearsInMarket} anos`, label: 'De experiência em logística' },
+  { value: `${company.serviceArea.length} regiões`, label: 'Manaus e RM, interior do AM e Roraima' },
+];
+---
+
+<section class="section about" id="sobre" aria-labelledby="sobre-title">
+  <div class="container about__grid">
+    <div class="about__media">
+      <Photo
+        src={photos.about.src}
+        alt={photos.about.alt}
+        sizes="(max-width: 900px) 100vw, 520px"
+        ratio="4 / 3"
+        placeholderLabel={photos.about.pending}
+      />
+    </div>
+    <div>
+      <p class="eyebrow">Sobre a GPSLOG</p>
+      <h2 id="sobre-title">{company.slogan}</h2>
+      <p class="lead">
+        Desde {company.foundingYear}, a GPSLOG atende empresas e pessoas em Manaus com transporte de cargas, entregas,
+        armazenagem e execução de operações promocionais em pontos de venda.
+      </p>
+      <p>
+        Combinamos estrutura própria de armazenagem, frota própria e veículos parceiros para organizar cada operação
+        conforme a demanda: de uma entrega pontual a rotinas recorrentes de distribuição e positivação. Cada
+        cliente tem atendimento direto com a nossa equipe, do orçamento à conclusão do serviço.
+      </p>
+      <dl class="about__facts">
+        {
+          facts.map((f) => (
+            <div>
+              <dt>{f.label}</dt>
+              <dd>{f.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+  .about__facts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0 0;
+  }
+  .about__facts div {
+    border-top: 3px solid var(--ink);
+    padding-top: 0.75rem;
+  }
+  .about__facts div:first-child {
+    border-top-color: var(--red);
+  }
+  .about__facts dt {
+    font-size: 0.8125rem;
+    color: var(--gray-500);
+    line-height: 1.35;
+  }
+  .about__facts dd {
+    margin: 0;
+    order: -1;
+    font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .about__facts div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  @media (max-width: 900px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .about__facts {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

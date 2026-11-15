@@ -1,0 +1,44 @@
+---
+/**
+ * Botão "Solicitar orçamento": rola até o formulário e, se informado,
+ * já deixa o serviço selecionado. Funciona sem JavaScript (âncora + parâmetro).
+ */
+import Icon from './Icon.astro';
+import type { ServiceId } from '../config/site';
+
+interface Props {
+  label?: string;
+  service?: ServiceId;
+  variant?: 'primary' | 'outline' | 'outline-light';
+  size?: 'sm' | 'md';
+  block?: boolean;
+  location: string;
+  class?: string;
+}
+
+const {
+  label = 'Solicitar orçamento',
+  service,
+  variant = 'primary',
+  size = 'md',
+  block = false,
+  location,
+  class: className,
+} = Astro.props;
+
+const href = service ? `?servico=${service}#orcamento` : '#orcamento';
+const classes = [
+  'btn',
+  variant !== 'primary' && `btn--${variant}`,
+  size === 'sm' && 'btn--sm',
+  block && 'btn--block',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<a class={classes} href={href} data-quote-service={service} data-cta-location={location}>
+  <span>{label}</span>
+  <Icon name="arrow" />
+</a>

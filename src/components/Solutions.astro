@@ -1,0 +1,217 @@
+---
+/**
+ * Visão geral das soluções. Para evitar repetição, os serviços que têm
+ * seção própria (positivação, transporte/atuação e armazenagem) aparecem
+ * aqui como resumo com link "Ver detalhes". Entregas é completo no card.
+ */
+import Photo from './Photo.astro';
+import QuoteButton from './QuoteButton.astro';
+import Icon from './Icon.astro';
+import type { ServiceId } from '../config/site';
+import { photos } from '../config/photos';
+
+type Card = {
+  id: ServiceId;
+  title: string;
+  description: string;
+  benefit: string;
+  items: string[];
+  photo: (typeof photos)[keyof typeof photos];
+  icon: 'store' | 'truck' | 'route' | 'warehouse';
+  detailsHref?: string;
+  featured?: boolean;
+};
+
+const cards: Card[] = [
+  {
+    id: 'positivacao',
+    title: 'Positivação e negativação',
+    description:
+      'Coletamos, transportamos, montamos, instalamos e organizamos móveis e materiais promocionais no ponto de venda. Depois, retiramos e devolvemos.',
+    benefit: 'Um único fornecedor para toda a operação de trade.',
+    items: ['Lojas, shoppings e atacadões', 'Drogarias e comércio em geral'],
+    photo: photos.positivacao,
+    icon: 'store',
+    detailsHref: '#positivacao',
+    featured: true,
+  },
+  {
+    id: 'transporte',
+    title: 'Transporte de cargas',
+    description:
+      'Cargas fracionadas e fechadas, transporte expresso de mercadorias e envios aéreos por companhias parceiras.',
+    benefit: 'A modalidade certa para o prazo e o volume da sua carga.',
+    items: ['Fracionada, fechada e expressa', 'Aéreo por companhias parceiras'],
+    photo: photos.transporte,
+    icon: 'truck',
+    detailsHref: '#atuacao',
+  },
+  {
+    id: 'entregas',
+    title: 'Entregas, coletas e distribuição',
+    description:
+      'Coletas programadas, entregas de mercadorias e distribuição para operações pontuais ou recorrentes.',
+    benefit: 'Coletas e entregas organizadas conforme a sua rotina, sem mobilizar equipe própria.',
+    items: ['Coletas programadas', 'Rotas pontuais ou recorrentes'],
+    photo: photos.entregas,
+    icon: 'route',
+  },
+  {
+    id: 'armazenagem',
+    title: 'Armazenagem de materiais promocionais',
+    description:
+      'Recebemos, armazenamos, controlamos entradas e saídas, separamos e expedimos seus materiais conforme a sua solicitação.',
+    benefit: 'Seu material guardado, controlado e pronto para sair quando você pedir.',
+    items: ['Controle interno de estoque', 'Separação e expedição sob demanda'],
+    photo: photos.armazenagem,
+    icon: 'warehouse',
+    detailsHref: '#armazenagem',
+  },
+];
+---
+
+<section class="section section--muted" id="solucoes" aria-labelledby="solucoes-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Nossas soluções</p>
+      <h2 id="solucoes-title">Do transporte à instalação no ponto de venda</h2>
+      <p class="lead">
+        Quatro frentes que funcionam sozinhas ou integradas, com uma única equipe responsável pela sua operação.
+      </p>
+    </div>
+
+    <ul class="cards">
+      {
+        cards.map((c) => (
+          <li class:list={['card', c.featured && 'card--featured']}>
+            <Photo
+              src={c.photo.src}
+              alt={c.photo.alt}
+              sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 380px"
+              widths={[400, 640, 900]}
+              ratio="16 / 10"
+              position={c.id === 'positivacao' ? 'center 40%' : 'center'}
+              placeholderLabel={c.photo.pending}
+              placeholderIcon={c.icon === 'warehouse' ? 'camera' : c.icon}
+              class="card__media"
+            />
+            <div class="card__body">
+              {c.featured && <span class="card__tag">Destaque</span>}
+              <span class="card__icon">
+                <Icon name={c.icon} size={22} />
+              </span>
+              <h3>{c.title}</h3>
+              <p>{c.description}</p>
+              <ul class="checklist card__items">
+                {c.items.map((i) => (
+                  <li>{i}</li>
+                ))}
+              </ul>
+              <p class="card__benefit">
+                <strong>Benefício:</strong> {c.benefit}
+              </p>
+              <div class="card__actions">
+                <QuoteButton service={c.id} size="sm" location={`card-${c.id}`} label="Solicitar orçamento" />
+                {c.detailsHref && (
+                  <a class="link-arrow" href={c.detailsHref}>
+                    Ver detalhes
+                  </a>
+                )}
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+  .card--featured {
+    border-top: 4px solid var(--red);
+  }
+  .card :global(.card__media) {
+    border-radius: 0;
+  }
+  .card__body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.5rem 1.5rem 1.75rem;
+  }
+  .card__icon {
+    position: absolute;
+    top: -26px;
+    left: 1.5rem;
+    width: 52px;
+    height: 52px;
+    display: grid;
+    place-items: center;
+    background: var(--ink);
+    color: var(--white);
+    border-radius: var(--radius);
+    border-bottom: 3px solid var(--red);
+  }
+  .card__tag {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--red);
+    background: var(--red-50);
+    padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+  }
+  .card h3 {
+    margin-top: 1.5rem;
+  }
+  .card p {
+    color: var(--gray-600);
+  }
+  .card__items {
+    margin: 0 0 1rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .card__benefit {
+    font-size: 0.9375rem;
+    background: var(--gray-100);
+    border-left: 3px solid var(--ink);
+    padding: 0.7rem 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  .card__benefit strong {
+    color: var(--ink);
+  }
+  .card__actions {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+  }
+  @media (max-width: 760px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

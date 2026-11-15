@@ -1,0 +1,187 @@
+---
+import Photo from './Photo.astro';
+import QuoteButton from './QuoteButton.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+import Icon from './Icon.astro';
+import { company } from '../config/site';
+import { photos } from '../config/photos';
+
+const proof = [
+  { icon: 'warehouse', text: 'Armazenagem com controle de estoque' },
+  { icon: 'pin', text: 'Manaus, interior do AM e Roraima' },
+  { icon: 'clock', text: `Retorno em ${company.firstResponse} úteis` },
+] as const;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <p class="hero__kicker">Transporte, armazenagem e logística promocional</p>
+      <h1 id="hero-title">Soluções logísticas que movimentam o seu negócio.</h1>
+      <p class="hero__sub">
+        Há {company.yearsInMarket} anos oferecendo soluções em transporte, armazenagem, entregas e logística
+        promocional, com agilidade e compromisso em cada operação.
+      </p>
+      <div class="btn-row">
+        <QuoteButton location="hero" />
+        <WhatsAppButton
+          label="Falar com um especialista"
+          location="hero"
+          variant="outline"
+        />
+      </div>
+      <ul class="hero__proof">
+        {
+          proof.map((p) => (
+            <li>
+              <Icon name={p.icon} size={20} />
+              <span>{p.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="hero__visual">
+      <Photo
+        src={photos.hero.src}
+        alt={photos.hero.alt}
+        sizes="(max-width: 900px) 100vw, 560px"
+        widths={[480, 768, 1080, 1448]}
+        ratio="4 / 3"
+        priority
+        placeholderLabel={photos.hero.pending}
+      />
+      <svg class="hero__squares" viewBox="0 0 120 120" aria-hidden="true">
+        <rect x="6" y="6" width="62" height="62" />
+        <rect x="28" y="28" width="62" height="62" class="dark" />
+        <rect x="50" y="50" width="62" height="62" />
+      </svg>
+      <p class="hero__badge">
+        <strong>Desde {company.foundingYear}</strong>
+        <span>{company.yearsInMarket} anos de operação em Manaus</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2rem, 5vw, 4.5rem) clamp(3rem, 6vw, 5rem);
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    overflow: hidden;
+  }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .hero__kicker {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--red);
+    border-left: 4px solid var(--red);
+    padding-left: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .hero__sub {
+    font-size: clamp(1.0625rem, 1.7vw, 1.25rem);
+    color: var(--gray-600);
+    max-width: 54ch;
+    margin-bottom: 2rem;
+  }
+  .hero__proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gray-200);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .hero__proof li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hero__proof :global(svg) {
+    color: var(--red);
+  }
+
+  .hero__visual {
+    position: relative;
+  }
+  .hero__visual :global(.media) {
+    box-shadow: var(--shadow);
+    position: relative;
+    z-index: 1;
+  }
+  .hero__squares {
+    position: absolute;
+    width: 150px;
+    right: -42px;
+    top: -42px;
+    fill: none;
+    stroke: var(--red);
+    stroke-width: 4;
+    z-index: 0;
+  }
+  .hero__squares .dark {
+    stroke: var(--ink);
+  }
+  .hero__badge {
+    position: absolute;
+    z-index: 2;
+    left: -1.25rem;
+    bottom: 1.5rem;
+    margin: 0;
+    background: var(--ink);
+    color: var(--white);
+    padding: 0.9rem 1.2rem;
+    border-left: 5px solid var(--red);
+    border-radius: var(--radius);
+    line-height: 1.25;
+    box-shadow: var(--shadow);
+  }
+  .hero__badge strong {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+  .hero__badge span {
+    font-size: 0.875rem;
+    color: #c9cdd2;
+  }
+
+  @media (max-width: 900px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+    }
+    .hero__squares {
+      display: none;
+    }
+    .hero__badge {
+      left: 0.75rem;
+      bottom: 0.75rem;
+      padding: 0.6rem 0.9rem;
+    }
+    .hero__badge strong {
+      font-size: 1.125rem;
+    }
+  }
+  @media (max-width: 600px) {
+    .hero__visual :global(.media) {
+      aspect-ratio: 16 / 10 !important;
+    }
+    .hero__kicker {
+      font-size: 0.75rem;
+    }
+  }
+</style>

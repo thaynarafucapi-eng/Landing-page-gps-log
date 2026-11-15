@@ -1,0 +1,256 @@
+---
+import Photo from './Photo.astro';
+import QuoteButton from './QuoteButton.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+import Icon from './Icon.astro';
+import { photos } from '../config/photos';
+
+const steps = [
+  { icon: 'inbox', title: 'Coleta', text: 'Retiramos móveis e materiais promocionais no local indicado.' },
+  { icon: 'truck', title: 'Transporte', text: 'Levamos tudo até o estabelecimento com o cuidado que o material exige.' },
+  { icon: 'tools', title: 'Montagem', text: 'Nossa equipe monta as estruturas e os móveis no ponto de venda.' },
+  { icon: 'layout', title: 'Instalação', text: 'Posicionamos e fixamos os materiais conforme o projeto da campanha.' },
+  { icon: 'layers', title: 'Organização', text: 'Deixamos o espaço organizado e pronto para receber o público.' },
+  { icon: 'undo', title: 'Retirada e retorno', text: 'Ao fim da ação, desmontamos, retiramos e levamos ao destino indicado.' },
+] as const;
+
+const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros estabelecimentos comerciais'];
+---
+
+<section class="section section--dark posit" id="positivacao" aria-labelledby="posit-title">
+  <div class="container">
+    <div class="posit__top">
+      <div class="posit__intro">
+        <p class="eyebrow">Logística promocional e trade</p>
+        <h2 id="posit-title">Positivação e negativação completas, do depósito ao ponto de venda</h2>
+        <p class="lead">
+          Mais que transportar móveis: a GPSLOG executa toda a operação da sua campanha no PDV. Você contrata um
+          fornecedor só e recebe o espaço montado, instalado e organizado.
+        </p>
+
+        <div class="posit__cols">
+          <div class="posit__col">
+            <h3>Positivação</h3>
+            <ul class="checklist">
+              <li>Coleta dos móveis e materiais promocionais</li>
+              <li>Transporte até o estabelecimento</li>
+              <li>Montagem e instalação</li>
+              <li>Organização dos materiais dentro da loja</li>
+            </ul>
+          </div>
+          <div class="posit__col">
+            <h3>Negativação</h3>
+            <ul class="checklist">
+              <li>Retirada dos móveis e materiais</li>
+              <li>Desmontagem, quando necessária</li>
+              <li>Transporte de retorno</li>
+              <li>Entrega no depósito ou destino indicado</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <figure class="posit__photo">
+        <Photo
+          src={photos.positivacao.src}
+          alt={photos.positivacao.alt}
+          sizes="(max-width: 900px) 100vw, 420px"
+          widths={[420, 640, 900]}
+          ratio="3 / 4"
+          position="center 35%"
+          placeholderLabel={photos.positivacao.pending}
+          placeholderIcon="store"
+        />
+        <figcaption>Estrutura promocional montada e instalada pela equipe GPSLOG em ponto de venda.</figcaption>
+      </figure>
+    </div>
+
+    <h3 class="posit__steps-title">Como funciona a operação</h3>
+    <ol class="steps">
+      {
+        steps.map((s, i) => (
+          <li class="step">
+            <span class="step__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <Icon name={s.icon} size={26} class="step__icon" />
+            <h4>{s.title}</h4>
+            <p>{s.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="posit__bottom">
+      <div>
+        <p class="posit__venues-label">Atendemos operações em:</p>
+        <ul class="venues">
+          {venues.map((v) => <li>{v}</li>)}
+        </ul>
+      </div>
+      <div class="btn-row">
+        <QuoteButton
+          service="positivacao"
+          label="Solicitar orçamento para minha operação"
+          location="positivacao"
+        />
+        <WhatsAppButton
+          label="Tirar dúvidas no WhatsApp"
+          message="Olá! Conheci a GPSLOG pelo site e gostaria de um orçamento para uma operação de positivação/negativação."
+          location="positivacao"
+          variant="outline-light"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .posit {
+    position: relative;
+    overflow: hidden;
+  }
+  .posit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--red);
+  }
+  .posit__top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .posit__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .posit__col {
+    background: var(--ink-800);
+    border: 1px solid #2c2f34;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+  }
+  .posit__col h3 {
+    font-size: 1.125rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--red);
+    display: inline-block;
+  }
+  .posit__col li {
+    color: #dfe2e6;
+    font-size: 0.9875rem;
+  }
+  .posit__photo {
+    margin: 0;
+  }
+  .posit__photo figcaption {
+    font-size: 0.8125rem;
+    color: #9aa0a8;
+    margin-top: 0.6rem;
+  }
+
+  .posit__steps-title {
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    margin-bottom: 1.5rem;
+    font-size: 1.375rem;
+  }
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    background: #2c2f34;
+    border: 1px solid #2c2f34;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .step {
+    position: relative;
+    background: var(--ink);
+    padding: 1.5rem 1.15rem;
+  }
+  .step__num {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 800;
+    color: #ff4d5e;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.9rem;
+  }
+  .step :global(.step__icon) {
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+  .step h4 {
+    color: var(--white);
+    font-size: 1.0625rem;
+    margin-bottom: 0.4rem;
+  }
+  .step p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    color: #aeb3ba;
+  }
+
+  .posit__bottom {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.5rem 2rem;
+  }
+  .posit__venues-label {
+    font-size: 0.875rem;
+    color: #9aa0a8;
+    margin-bottom: 0.6rem;
+  }
+  .venues {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .venues li {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--white);
+    border: 1px solid #3a3e44;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  @media (max-width: 1100px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 900px) {
+    .posit__top {
+      grid-template-columns: 1fr;
+    }
+    .posit__photo {
+      max-width: 460px;
+    }
+  }
+  @media (max-width: 640px) {
+    .posit__cols {
+      grid-template-columns: 1fr;
+    }
+    .steps {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 400px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

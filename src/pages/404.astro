@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+---
+
+<Base title="Página não encontrada | GPSLOG" description="A página procurada não existe." noindex>
+  <Header />
+  <main id="conteudo" class="section">
+    <div class="container" style="max-width:640px">
+      <p class="eyebrow">Erro 404</p>
+      <h1>Página não encontrada</h1>
+      <p class="lead">O endereço pode ter mudado. Volte para o início ou fale direto com a nossa equipe.</p>
+      <div class="btn-row">
+        <a class="btn" href="/">Ir para o início</a>
+        <WhatsAppButton location="404" />
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  import '../scripts/main.ts';
+</script>

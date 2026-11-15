@@ -1,0 +1,112 @@
+---
+/**
+ * Foto otimizada (AVIF/WebP responsivo) ou, se ainda não houver foto real,
+ * um espaço reservado na identidade da marca.
+ * O rótulo "Foto pendente" aparece apenas em desenvolvimento (npm run dev),
+ * para não expor um aviso técnico no site publicado.
+ */
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  src?: ImageMetadata;
+  alt: string;
+  sizes: string;
+  widths?: number[];
+  ratio?: string;
+  loading?: 'lazy' | 'eager';
+  priority?: boolean;
+  position?: string;
+  placeholderLabel?: string;
+  placeholderIcon?: 'camera' | 'truck' | 'users' | 'store' | 'route';
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  sizes,
+  widths = [480, 768, 1080, 1440],
+  ratio = '4 / 3',
+  loading = 'lazy',
+  priority = false,
+  position = 'center',
+  placeholderLabel,
+  placeholderIcon = 'camera',
+  class: className,
+} = Astro.props;
+
+const isDev = import.meta.env.DEV;
+const usableWidths = src ? widths.filter((w) => w <= src.width) : [];
+if (src && !usableWidths.includes(src.width) && src.width < Math.max(...widths)) {
+  usableWidths.push(src.width);
+}
+---
+
+<div class:list={['media', className, !src && 'media--placeholder']} style={`aspect-ratio:${ratio}`}>
+  {
+    src ? (
+      <Picture
+        src={src}
+        alt={alt}
+        formats={['avif', 'webp']}
+        widths={usableWidths}
+        sizes={sizes}
+        loading={priority ? 'eager' : loading}
+        fetchpriority={priority ? 'high' : undefined}
+        decoding={priority ? 'sync' : 'async'}
+        style={`object-position:${position}`}
+        quality={72}
+      />
+    ) : (
+      <div class="placeholder" role="img" aria-label={alt}>
+        <svg class="placeholder__mark" viewBox="0 0 120 120" aria-hidden="true">
+          <rect x="6" y="6" width="62" height="62" />
+          <rect x="28" y="28" width="62" height="62" />
+          <rect x="50" y="50" width="62" height="62" />
+        </svg>
+        <Icon name={placeholderIcon} size={34} class="placeholder__icon" />
+        {isDev && placeholderLabel && <span class="placeholder__label">Foto pendente: {placeholderLabel}</span>}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .media :global(picture) {
+    display: contents;
+  }
+  .placeholder {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 0.04), transparent 60%),
+      var(--ink-800);
+    color: rgb(255 255 255 / 0.55);
+  }
+  .placeholder__mark {
+    position: absolute;
+    right: -18px;
+    bottom: -18px;
+    width: 46%;
+    max-width: 220px;
+    fill: none;
+    stroke: var(--red);
+    stroke-width: 3;
+    opacity: 0.5;
+  }
+  .placeholder__label {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    background: #ffd400;
+    color: #111;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+</style>

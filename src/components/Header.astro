@@ -1,0 +1,173 @@
+---
+import Icon from './Icon.astro';
+import { whatsappUrl } from '../config/site';
+
+const nav = [
+  { href: '#solucoes', label: 'Soluções' },
+  { href: '#positivacao', label: 'Positivação' },
+  { href: '#atuacao', label: 'Área de atuação' },
+  { href: '#estrutura', label: 'Estrutura' },
+  { href: '#orcamento', label: 'Orçamento' },
+];
+---
+
+<header class="header" data-header>
+  <div class="container header__inner">
+    <a href="/" class="header__logo" aria-label="GPSLOG — página inicial">
+      <img src="/brand/logo.svg" alt="GPSLOG Transportes e Logística" width="180" height="51" />
+    </a>
+
+    <nav class="header__nav" id="menu" aria-label="Navegação principal" data-menu>
+      <ul>
+        {nav.map((item) => (
+          <li><a href={item.href} data-menu-link>{item.label}</a></li>
+        ))}
+      </ul>
+      <a class="btn btn--sm header__cta-mobile" href="#orcamento" data-menu-link data-cta-location="menu">
+        Solicitar orçamento
+      </a>
+    </nav>
+
+    <div class="header__actions">
+      <a
+        class="btn btn--wa btn--sm header__wa"
+        href={whatsappUrl()}
+        target="_blank"
+        rel="noopener"
+        data-wa-location="header"
+      >
+        <Icon name="whatsapp" />
+        <span class="header__wa-label">WhatsApp</span>
+        <span class="sr-only">(abre em nova aba)</span>
+      </a>
+      <button
+        class="header__toggle"
+        type="button"
+        aria-controls="menu"
+        aria-expanded="false"
+        aria-label="Abrir menu"
+        data-menu-toggle
+      >
+        <Icon name="menu" class="icon-open" />
+        <Icon name="close" class="icon-close" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgb(255 255 255 / 0.97);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .header.is-scrolled {
+    border-bottom-color: var(--gray-200);
+    box-shadow: 0 2px 12px rgb(17 17 17 / 0.06);
+  }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: var(--header-h);
+  }
+  .header__logo img {
+    width: 150px;
+    height: auto;
+  }
+  .header__nav {
+    margin-left: auto;
+  }
+  .header__nav ul {
+    display: flex;
+    gap: 1.75rem;
+  }
+  .header__nav a:not(.btn) {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+  }
+  .header__nav a:not(.btn):hover {
+    border-bottom-color: var(--red);
+  }
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .header__toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius);
+    background: var(--white);
+    color: var(--ink);
+    cursor: pointer;
+    place-items: center;
+  }
+  .header__toggle :global(.icon-close) {
+    display: none;
+  }
+  .header__toggle[aria-expanded='true'] :global(.icon-open) {
+    display: none;
+  }
+  .header__toggle[aria-expanded='true'] :global(.icon-close) {
+    display: block;
+  }
+  .header__cta-mobile {
+    display: none;
+  }
+
+  @media (max-width: 960px) {
+    .header__logo img {
+      width: 128px;
+    }
+    .header__toggle {
+      display: grid;
+    }
+    .header__actions {
+      margin-left: auto;
+    }
+    .header__nav {
+      position: fixed;
+      inset: var(--header-h) 0 auto 0;
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      box-shadow: 0 16px 32px rgb(17 17 17 / 0.12);
+      padding: 0.5rem var(--gutter) 1.25rem;
+      display: none;
+    }
+    .header__nav.is-open {
+      display: block;
+    }
+    .header__nav ul {
+      flex-direction: column;
+      gap: 0;
+    }
+    .header__nav a:not(.btn) {
+      display: block;
+      padding: 0.95rem 0;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 1.0625rem;
+    }
+    .header__cta-mobile {
+      display: flex;
+      margin-top: 1rem;
+      width: 100%;
+    }
+  }
+  @media (max-width: 380px) {
+    .header__wa-label {
+      display: none;
+    }
+  }
+</style>

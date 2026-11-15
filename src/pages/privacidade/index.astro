@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { company, contact } from '../../config/site';
+const updated = 'novembro de 2026';
+---
+
+<Base title="Política de privacidade | GPSLOG" description="Como a GPSLOG trata os dados enviados pelo site.">
+  <Header />
+  <main id="conteudo" class="section">
+    <article class="container legal">
+      <p class="eyebrow">Institucional</p>
+      <h1>Política de privacidade</h1>
+      <p class="lead">Última atualização: {updated}.</p>
+
+      <h2>1. Quem somos</h2>
+      <p>
+        Este site pertence à {company.legalLabel}, com sede na {company.address.street}, {company.address.district},
+        {company.address.city} – {company.address.state}. Esta política explica como tratamos os dados pessoais
+        enviados por aqui, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).
+      </p>
+
+      <h2>2. Quais dados coletamos</h2>
+      <p>
+        No formulário de orçamento: nome, empresa (opcional), número de WhatsApp, tipo de serviço e as informações da
+        operação que você decidir informar. Esses dados não ficam armazenados no site: ao enviar, eles são organizados em
+        uma mensagem que você mesmo envia para o nosso WhatsApp comercial.
+      </p>
+      <p>
+        Se ferramentas de medição estiverem ativas (como Google Analytics, Google Ads ou Meta Pixel), elas podem coletar
+        dados de navegação, como páginas visitadas, cliques e informações do dispositivo, por meio de cookies.
+      </p>
+
+      <h2>3. Para que usamos</h2>
+      <ul class="checklist">
+        <li>Responder à sua solicitação e preparar a proposta comercial;</li>
+        <li>Manter o contato sobre o serviço solicitado;</li>
+        <li>Medir o desempenho do site e das campanhas de divulgação.</li>
+      </ul>
+      <p>Não vendemos nem cedemos os seus dados a terceiros para fins de marketing.</p>
+
+      <h2>4. Compartilhamento</h2>
+      <p>
+        As mensagens trafegam pelo WhatsApp (Meta), conforme os termos dessa plataforma. Dados de navegação podem ser
+        processados pelos fornecedores das ferramentas de medição citadas acima.
+      </p>
+
+      <h2>5. Seus direitos</h2>
+      <p>
+        Você pode pedir a qualquer momento a confirmação, o acesso, a correção ou a exclusão dos seus dados, pelo
+        WhatsApp {contact.whatsappDisplay}, de {company.hours.short.toLowerCase()}.
+      </p>
+
+      <h2>6. Cookies</h2>
+      <p>
+        Você pode bloquear ou apagar cookies nas configurações do seu navegador. O site continua funcionando sem eles.
+      </p>
+
+      <p><a class="link-arrow" href="/">Voltar ao site</a></p>
+    </article>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .legal {
+    max-width: 760px;
+  }
+  .legal h2 {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+  }
+</style>
+
+<script>
+  import '../../scripts/main.ts';
+</script>

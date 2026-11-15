@@ -1,0 +1,129 @@
+---
+import Icon from './Icon.astro';
+import { company, contact, whatsappUrl } from '../config/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <img src="/brand/logo-negativo.svg" alt="GPSLOG Transportes e Logística" width="200" height="57" loading="lazy" />
+      <p class="footer__slogan">{company.slogan}</p>
+      <p>Transporte, armazenagem, entregas e logística promocional desde {company.foundingYear}.</p>
+    </div>
+
+    <div>
+      <h2 class="footer__title">Contato</h2>
+      <ul class="footer__list">
+        <li>
+          <Icon name="whatsapp" size={18} />
+          <a href={whatsappUrl()} target="_blank" rel="noopener" data-wa-location="footer">
+            {contact.whatsappDisplay}
+          </a>
+        </li>
+        <li>
+          <Icon name="instagram" size={18} />
+          <a href={contact.instagramUrl} target="_blank" rel="noopener">{contact.instagramHandle}</a>
+        </li>
+        <li>
+          <Icon name="pin" size={18} />
+          <span>
+            {company.address.street}, {company.address.district}<br />
+            {company.address.city} – {company.address.state}
+          </span>
+        </li>
+        <li>
+          <Icon name="clock" size={18} />
+          <span>{company.hours.label}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="footer__title">Área de atuação</h2>
+      <ul class="footer__list footer__list--plain">
+        {company.serviceArea.map((a) => <li>{a}</li>)}
+        <li>Transporte aéreo por companhias parceiras</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="footer__title">Institucional</h2>
+      <ul class="footer__list footer__list--plain">
+        <li><a href="/#sobre">Sobre a GPSLOG</a></li>
+        <li><a href="/#solucoes">Soluções</a></li>
+        <li><a href="/#orcamento">Solicitar orçamento</a></li>
+        <li><a href="/privacidade/">Política de privacidade</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <p>© {year} {company.legalLabel}. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--ink);
+    color: #aeb3ba;
+    padding-top: clamp(3rem, 6vw, 4.5rem);
+    font-size: 0.9375rem;
+    padding-bottom: 5rem;
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1.3fr 1fr 1fr;
+    gap: 2.5rem;
+  }
+  .footer__brand img {
+    width: 190px;
+    margin-bottom: 1rem;
+  }
+  .footer__slogan {
+    color: var(--white);
+    font-weight: 700;
+  }
+  .footer__title {
+    color: var(--white);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.1rem;
+  }
+  .footer__list li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+    line-height: 1.45;
+  }
+  .footer__list :global(svg) {
+    flex: none;
+    margin-top: 2px;
+    color: #ff4d5e;
+  }
+  .footer a {
+    color: #dfe2e6;
+    text-decoration: none;
+  }
+  .footer a:hover {
+    color: var(--white);
+    text-decoration: underline;
+  }
+  .footer__bottom {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #2c2f34;
+    font-size: 0.8125rem;
+  }
+  @media (max-width: 960px) {
+    .footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

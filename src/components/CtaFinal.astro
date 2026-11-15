@@ -1,0 +1,80 @@
+---
+import QuoteButton from './QuoteButton.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+import { company } from '../config/site';
+---
+
+<section class="cta" aria-labelledby="cta-title">
+  <div class="container cta__inner">
+    <svg class="cta__squares" viewBox="0 0 120 120" aria-hidden="true">
+      <rect x="6" y="6" width="62" height="62" />
+      <rect x="28" y="28" width="62" height="62" />
+      <rect x="50" y="50" width="62" height="62" />
+    </svg>
+    <div class="cta__copy">
+      <h2 id="cta-title">Precisa de uma solução logística confiável?</h2>
+      <p>
+        Conte com a experiência da GPSLOG para organizar suas operações de transporte, armazenagem e distribuição.
+      </p>
+      <p class="cta__meta">{company.hours.label} · Primeiro retorno em {company.firstResponse}</p>
+    </div>
+    <div class="cta__actions">
+      <QuoteButton location="cta-final" variant="outline-light" />
+      <WhatsAppButton location="cta-final" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background: var(--red);
+    color: var(--white);
+    padding-block: clamp(3rem, 7vw, 5rem);
+    overflow: hidden;
+  }
+  .cta__inner {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .cta__squares {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    width: 260px;
+    transform: translateY(-50%);
+    fill: none;
+    stroke: rgb(255 255 255 / 0.16);
+    stroke-width: 3;
+    pointer-events: none;
+  }
+  .cta__copy {
+    max-width: 620px;
+    position: relative;
+  }
+  .cta h2 {
+    color: var(--white);
+  }
+  .cta p {
+    font-size: 1.125rem;
+    color: rgb(255 255 255 / 0.92);
+  }
+  .cta__meta {
+    font-size: 0.9375rem !important;
+    margin: 0;
+    color: rgb(255 255 255 / 0.8) !important;
+  }
+  .cta__actions {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: min(100%, 300px);
+  }
+  .cta__actions :global(.btn--outline-light) {
+    border-color: var(--white);
+  }
+</style>

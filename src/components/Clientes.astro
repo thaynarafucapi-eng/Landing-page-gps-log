@@ -1,0 +1,57 @@
+---
+/**
+ * Empresas atendidas. Só é renderizada quando `clients.showClients` = true
+ * em src/config/site.ts, e apenas após autorização de divulgação.
+ */
+import { clients } from '../config/site';
+const list = clients.list;
+---
+
+{
+  clients.showClients && list.length > 0 && (
+    <section class="section clientes" id="clientes" aria-labelledby="clientes-title">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <p class="eyebrow">Empresas atendidas</p>
+          <h2 id="clientes-title">Empresas que já contaram com a GPSLOG</h2>
+        </div>
+        <ul class="logos">
+          {list.map((c) => (
+            <li>
+              {c.logo ? (
+                <img src={c.logo} alt={c.name} loading="lazy" width="160" height="64" />
+              ) : (
+                <span>{c.name}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .logos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  .logos li {
+    display: grid;
+    place-items: center;
+    min-height: 88px;
+    padding: 1rem;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    font-weight: 700;
+    color: var(--gray-600);
+    text-align: center;
+  }
+  .logos img {
+    max-height: 48px;
+    width: auto;
+    filter: grayscale(1);
+    opacity: 0.8;
+  }
+</style>

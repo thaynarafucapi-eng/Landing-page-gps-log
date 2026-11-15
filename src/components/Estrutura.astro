@@ -1,0 +1,209 @@
+---
+import Photo from './Photo.astro';
+import Icon from './Icon.astro';
+import { company, contact, mapsEmbedUrl, mapsLinkUrl } from '../config/site';
+import { photos } from '../config/photos';
+
+const gallery = [
+  { ...photos.fachada, caption: 'Galpão', icon: 'camera', span: 'wide' },
+  { ...photos.veiculos, caption: 'Frota', icon: 'truck', span: '' },
+  { ...photos.hero, caption: 'Armazenagem', icon: 'camera', span: '' },
+  { ...photos.equipe, caption: 'Equipe', icon: 'users', span: '' },
+  { ...photos.escritorio, caption: 'Administrativo', icon: 'camera', span: '' },
+] as const;
+
+const pillars = [
+  { icon: 'warehouse', text: 'Área de armazenagem com porta-paletes' },
+  { icon: 'truck', text: 'Frota própria e veículos parceiros' },
+  { icon: 'clipboard', text: 'Controle interno de estoque' },
+  { icon: 'users', text: 'Equipes operacional e administrativa' },
+] as const;
+---
+
+<section class="section section--muted" id="estrutura" aria-labelledby="estrutura-title">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Nossa estrutura</p>
+      <h2 id="estrutura-title">Estrutura real, em Manaus, pronta para a sua operação</h2>
+      <p class="lead">
+        Galpão no Conjunto Ben-Hur, equipe dedicada e frota flexível, ajustada ao tamanho de cada demanda.
+      </p>
+    </div>
+
+    <ul class="pillars">
+      {
+        pillars.map((p) => (
+          <li>
+            <Icon name={p.icon} size={22} />
+            <span>{p.text}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <ul class="gallery">
+      {
+        gallery.map((g) => (
+          <li class:list={['gallery__item', g.span && `gallery__item--${g.span}`]}>
+            <Photo
+              src={g.src}
+              alt={g.alt}
+              sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 400px"
+              widths={[400, 640, 960]}
+              ratio="auto"
+              placeholderLabel={g.pending}
+              placeholderIcon={g.icon}
+            />
+            <span class="gallery__caption">{g.caption}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="local">
+      <div class="local__info">
+        <h3>Onde estamos</h3>
+        <address>
+          {company.address.street}<br />
+          {company.address.district}, {company.address.city} – {company.address.state}
+        </address>
+        <p class="local__hours">
+          <Icon name="clock" size={18} />
+          {company.hours.label}
+        </p>
+        <a class="link-arrow" href={mapsLinkUrl} target="_blank" rel="noopener">
+          Abrir no Google Maps <span class="sr-only">(nova aba)</span>
+        </a>
+      </div>
+      <div class="local__map" data-map>
+        <iframe
+          title={`Mapa: ${contact.mapsQuery}`}
+          src={mapsEmbedUrl}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .pillars li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .pillars :global(svg) {
+    flex: none;
+    color: var(--red);
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 210px;
+    gap: 0.75rem;
+  }
+  .gallery__item {
+    position: relative;
+  }
+  .gallery__item :global(.media) {
+    height: 100%;
+  }
+  .gallery__item--wide {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .gallery__caption {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0.75rem;
+    background: rgb(17 17 17 / 0.85);
+    color: var(--white);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    padding: 0.3rem 0.65rem;
+    border-radius: 3px;
+    border-left: 3px solid var(--red);
+  }
+
+  .local {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 0;
+    margin-top: 2.5rem;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .local__info {
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+  .local__info address {
+    font-style: normal;
+    font-size: 1.0625rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .local__hours {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gray-600);
+    font-size: 0.9375rem;
+  }
+  .local__hours :global(svg) {
+    color: var(--red);
+  }
+  .local__map {
+    min-height: 300px;
+    background: var(--gray-200);
+  }
+  .local__map iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    border: 0;
+    display: block;
+  }
+
+  @media (max-width: 960px) {
+    .pillars {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 760px) {
+    .gallery {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 160px;
+    }
+    .gallery__item--wide {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .local {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .pillars {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
