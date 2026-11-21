@@ -39,6 +39,7 @@ export const company = {
 export const contact = {
   whatsappDisplay: '(92) 99966-8377',
   whatsappNumber: '5592999668377',
+  email: 'comercial@gpslogmao.com',
   whatsappDefaultMessage:
     'Olá! Conheci a GPSLOG pelo site e gostaria de solicitar um orçamento. Poderiam me ajudar?',
   instagramUrl: 'https://www.instagram.com/gpslog.transporte.logistica/',

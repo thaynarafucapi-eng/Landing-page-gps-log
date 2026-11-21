@@ -3,6 +3,7 @@ import { company } from '../config/site';
 
 const facts = [
   { value: String(company.foundingYear), label: 'Ano de fundação' },
+  { value: '40 entregas', label: 'Por mês, em média' },
   { value: '12 municípios', label: 'Do interior recebem entregas todo mês' },
   { value: 'Todo o Amazonas', label: 'Manaus, todos os municípios do interior e Roraima' },
 ];
@@ -42,7 +43,7 @@ const facts = [
   }
   .about__facts {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     margin: 2rem 0 0;
   }
@@ -76,7 +77,7 @@ const facts = [
       grid-template-columns: 1fr;
     }
   }
-  @media (max-width: 480px) {
+  @media (max-width: 900px) {
     .about__facts {
       grid-template-columns: 1fr 1fr;
     }
