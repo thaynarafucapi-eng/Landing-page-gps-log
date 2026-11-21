@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^gpslogmao\.com$ [NC]
+RewriteRule ^(.*)$ https://www.gpslogmao.com/$1 [R=301,L]
+
+ErrorDocument 404 /404.html
