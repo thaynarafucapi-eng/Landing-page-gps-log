@@ -11,7 +11,7 @@ import galpaoFachada from '../assets/fotos/galpao-fachada.jpg';
 import escritorio from '../assets/fotos/escritorio.jpg';
 import positivacaoPdv from '../assets/fotos/positivacao-pdv.jpg';
 import positivacaoPdv2 from '../assets/fotos/positivacao-pdv-2.jpg';
-import fachadaPlacaBranca from '../assets/fotos/fachada-placa-branca.png';
+import fachadaPlacaHd from '../assets/fotos/fachada-placa-hd.jpg';
 import pdvZaad from '../assets/fotos/pdv-zaad.jpg';
 import pdvSkol from '../assets/fotos/pdv-skol.jpg';
 import pdvTrident from '../assets/fotos/pdv-trident.jpg';
@@ -31,7 +31,7 @@ export const pdvGallery = [
 
 export const photos = {
   hero: {
-    src: fachadaPlacaBranca,
+    src: fachadaPlacaHd,
     alt: 'Fachada do galpão da GPSLOG, com a placa da empresa, em Manaus',
     pending: 'operação (hero)',
   },
@@ -81,7 +81,7 @@ export const photos = {
     pending: 'escritório',
   },
   fachada: {
-    src: galpaoFachada,
+    src: fachadaPlacaHd,
     alt: 'Galpão da GPSLOG em Manaus',
     pending: 'fachada',
   },
