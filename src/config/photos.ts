@@ -12,6 +12,7 @@ import escritorio from '../assets/fotos/escritorio.jpg';
 import positivacaoPdv from '../assets/fotos/positivacao-pdv.jpg';
 import positivacaoPdv2 from '../assets/fotos/positivacao-pdv-2.jpg';
 import fachadaPlacaHd from '../assets/fotos/fachada-placa-hd.jpg';
+import frota from '../assets/fotos/frota.jpg';
 import pdvZaad from '../assets/fotos/pdv-zaad.jpg';
 import pdvSkol from '../assets/fotos/pdv-skol.jpg';
 import pdvTrident from '../assets/fotos/pdv-trident.jpg';
@@ -66,8 +67,8 @@ export const photos = {
     pending: 'montagem e instalação',
   },
   veiculos: {
-    src: undefined,
-    alt: 'Frota da GPSLOG',
+    src: frota,
+    alt: 'Frota de veículos brancos da GPSLOG para entregas e transporte',
     pending: 'veículos',
   },
   equipe: {
