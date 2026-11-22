@@ -46,6 +46,12 @@ export const contact = {
   mapsQuery: 'Rua Urânio, 27, Conjunto Ben-Hur, Manaus - AM',
 } as const;
 
+/** Crédito de criação exibido no rodapé. */
+export const credit = {
+  name: 'Thay Lab Criativo',
+  url: 'https://www.instagram.com/thaylabcriativo/',
+} as const;
+
 export const whatsappUrl = (message: string = contact.whatsappDefaultMessage) =>
   `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(message)}`;
 

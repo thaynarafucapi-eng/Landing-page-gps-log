@@ -1,6 +1,6 @@
 ---
 import Icon from './Icon.astro';
-import { company, contact, whatsappUrl } from '../config/site';
+import { company, contact, credit, whatsappUrl } from '../config/site';
 const year = new Date().getFullYear();
 ---
 
@@ -62,6 +62,10 @@ const year = new Date().getFullYear();
   </div>
   <div class="container footer__bottom">
     <p>© {year} {company.legalLabel}. Todos os direitos reservados.</p>
+    <p class="footer__credit">
+      Feito com <span class="footer__heart" aria-label="amor">♥</span> por
+      <a href={credit.url} target="_blank" rel="noopener noreferrer">{credit.name}<span class="sr-only"> (abre o Instagram em nova aba)</span></a>
+    </p>
   </div>
 </footer>
 
@@ -118,6 +122,21 @@ const year = new Date().getFullYear();
     padding-top: 1.5rem;
     border-top: 1px solid #2c2f34;
     font-size: 0.8125rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+  }
+  .footer__bottom p {
+    margin: 0;
+  }
+  .footer__heart {
+    color: #ff4d5e;
+  }
+  .footer__credit a {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   @media (max-width: 960px) {
     .footer__grid {
