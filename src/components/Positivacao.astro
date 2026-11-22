@@ -5,17 +5,18 @@ import Icon from './Icon.astro';
 import { photos, pdvGallery } from '../config/photos';
 import { Picture } from 'astro:assets';
 
-const steps = [
-  { icon: 'inbox', title: 'Coleta', text: 'Buscamos os materiais da campanha no local indicado.' },
-  { icon: 'truck', title: 'Transporte', text: 'Levamos tudo até o estabelecimento com o cuidado que o material exige.' },
-  { icon: 'tools', title: 'Montagem', text: 'Nossa equipe monta as estruturas no ponto de venda.' },
-  { icon: 'layout', title: 'Instalação', text: 'Posicionamos e fixamos os materiais conforme o projeto da campanha.' },
-  { icon: 'layers', title: 'Organização', text: 'Deixamos o espaço organizado e pronto para receber o público.' },
-  { icon: 'undo', title: 'Retirada e retorno', text: 'Ao fim da ação, desmontamos, retiramos e levamos ao depósito ou destino indicado.' },
+const groups = [
+  {
+    icon: 'layout',
+    title: 'Positivação',
+    text: 'Coletamos os materiais da campanha, levamos até o estabelecimento, montamos, instalamos e organizamos o espaço, pronto para receber o público.',
+  },
+  {
+    icon: 'undo',
+    title: 'Negativação',
+    text: 'Ao fim da ação, desmontamos, retiramos e levamos ao depósito ou destino indicado.',
+  },
 ] as const;
-
-const positivacao = steps.slice(0, 5);
-const negativacao = steps.slice(5);
 
 const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros estabelecimentos comerciais'];
 ---
@@ -60,36 +61,17 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
 
     <h3 class="posit__steps-title">Como funciona a operação</h3>
     <div class="flow">
-      <div class="flow__group">
-        <h4 class="flow__label">Positivação</h4>
-        <ol class="steps steps--pos">
-          {
-            positivacao.map((s, i) => (
-              <li class="step">
-                <span class="step__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-                <Icon name={s.icon} size={26} class="step__icon" />
-                <h4>{s.title}</h4>
-                <p>{s.text}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-      <div class="flow__group">
-        <h4 class="flow__label">Negativação</h4>
-        <ol class="steps steps--neg" start={positivacao.length + 1}>
-          {
-            negativacao.map((s, i) => (
-              <li class="step">
-                <span class="step__num" aria-hidden="true">{String(positivacao.length + i + 1).padStart(2, '0')}</span>
-                <Icon name={s.icon} size={26} class="step__icon" />
-                <h4>{s.title}</h4>
-                <p>{s.text}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
+      {
+        groups.map((g) => (
+          <div class="flow__group">
+            <span class="flow__icon">
+              <Icon name={g.icon} size={26} />
+            </span>
+            <h4 class="flow__title">{g.title}</h4>
+            <p>{g.text}</p>
+          </div>
+        ))
+      }
     </div>
 
     <h3 class="posit__steps-title">Operações realizadas pela GPSLOG</h3>
@@ -150,70 +132,37 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
   }
   .flow {
     display: grid;
-    grid-template-columns: 5fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 1.25rem;
   }
   .flow__group {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
     background: var(--ink-800);
     border: 1px solid #2c2f34;
     border-top: 3px solid var(--red);
     border-radius: var(--radius-lg);
-    padding: 1.1rem 1.1rem 1.25rem;
+    padding: 1.5rem 1.5rem 1.75rem;
   }
-  .flow__label {
-    font-size: 0.8125rem;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #ff4d5e;
-    margin: 0 0 0.9rem;
-  }
-  .steps {
-    flex: 1;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1px;
-    background: #2c2f34;
-    border: 1px solid #2c2f34;
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-  .steps--neg {
-    grid-template-columns: 1fr;
-  }
-  .step {
-    position: relative;
+  .flow__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
+    color: var(--white);
     background: var(--ink);
-    padding: 1.5rem 1.15rem;
+    border: 1px solid #3a3e44;
+    border-radius: var(--radius);
   }
-  .step__num {
-    display: block;
-    font-size: 0.8125rem;
-    font-weight: 800;
-    color: #ff4d5e;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.9rem;
-  }
-  .step :global(.step__icon) {
+  .flow__title {
     color: var(--white);
-    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
   }
-  .step h4 {
-    color: var(--white);
-    font-size: 1.0625rem;
-    margin-bottom: 0.4rem;
-  }
-  .step p {
-    font-size: 0.9rem;
-    line-height: 1.5;
+  .flow__group p {
     margin: 0;
     color: #aeb3ba;
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
   .works {
@@ -270,20 +219,6 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
     border-radius: 999px;
   }
 
-  @media (max-width: 1100px) {
-    .flow {
-      grid-template-columns: 1fr;
-    }
-    .steps--pos {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .steps--pos .step:nth-child(5) {
-      grid-column: span 2;
-    }
-    .steps--neg {
-      grid-template-columns: 1fr;
-    }
-  }
   @media (max-width: 900px) {
     .posit__top {
       grid-template-columns: 1fr;
@@ -291,23 +226,8 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
     .posit__photo {
       max-width: 460px;
     }
-  }
-  @media (max-width: 640px) {
-    .steps--pos {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  @media (max-width: 340px) {
-    .steps--pos {
+    .flow {
       grid-template-columns: 1fr;
-    }
-    .steps--pos .step:nth-child(5) {
-      grid-column: auto;
-    }
-  }
-  @media (max-width: 640px) {
-    .step {
-      padding: 1.1rem 0.9rem;
     }
   }
 </style>
