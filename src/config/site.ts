@@ -68,9 +68,14 @@ export const clients = {
     { name: 'LSLog Logística Promocional', logo: '/clientes/lslog.webp' },
     { name: 'Pier Serv', logo: '/clientes/pierserv.webp' },
     { name: 'Profile Group', logo: '/clientes/profile.webp' },
+    { name: 'AcolherLog', logo: '/clientes/acolher.webp' },
+    { name: 'NEXT', logo: '/clientes/next.webp' },
+    { name: 'USA Encomendas', logo: '/clientes/usa.webp' },
+    { name: 'Saggezza: conectando varejo e futuro', logo: '/clientes/saggezza.webp' },
+    { name: 'Tradelog Logística Promocional', logo: '/clientes/tradelog.webp' },
   ],
   /** Parceiros sem logotipo disponível: aparecem só com o nome. */
-  names: ['Tradelog', 'Promolog', 'Cargopress', 'Acolher', 'Saggezza', 'USA Encomendas'],
+  names: ['Promolog', 'Cargopress'],
 };
 
 /** Serviços: usados nos cards, no seletor do formulário e na mensagem do WhatsApp. */

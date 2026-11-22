@@ -49,7 +49,7 @@ const list = clients.list;
   }
   /* flex centralizado: com 7 logotipos, a última linha fica no meio */
   .logos {
-    --cols: 7;
+    --cols: 6;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -59,14 +59,14 @@ const list = clients.list;
     flex: 0 0 calc((100% - (var(--cols) - 1) * 0.75rem) / var(--cols));
     display: grid;
     place-items: center;
-    height: 80px;
+    height: 104px;
     padding: 0.6rem 0.8rem;
     background: var(--white);
     border: 1px solid var(--gray-200);
     border-radius: var(--radius);
   }
   .logos img {
-    max-height: 52px;
+    max-height: 82px;
     max-width: 100%;
     width: auto;
     height: auto;
@@ -93,11 +93,11 @@ const list = clients.list;
       gap: 0.5rem;
     }
     .logos li {
-      height: 64px;
+      height: 88px;
       padding: 0.4rem 0.5rem;
     }
     .logos img {
-      max-height: 40px;
+      max-height: 68px;
     }
   }
 </style>
