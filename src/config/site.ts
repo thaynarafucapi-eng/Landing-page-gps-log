@@ -73,9 +73,10 @@ export const clients = {
     { name: 'USA Encomendas', logo: '/clientes/usa.webp' },
     { name: 'Saggezza: conectando varejo e futuro', logo: '/clientes/saggezza.webp' },
     { name: 'Tradelog Logística Promocional', logo: '/clientes/tradelog.webp' },
+    { name: 'MD Promolog: inteligência em logística promocional', logo: '/clientes/promolog.webp' },
   ],
   /** Parceiros sem logotipo disponível: aparecem só com o nome. */
-  names: ['Promolog', 'Cargopress'],
+  names: ['Cargopress'],
 };
 
 /** Serviços: usados nos cards, no seletor do formulário e na mensagem do WhatsApp. */
