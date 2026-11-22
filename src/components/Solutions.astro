@@ -54,7 +54,7 @@ const cards: Card[] = [
     id: 'positivacao',
     title: 'Positivação e negativação',
     description:
-      'Coletamos, transportamos, montamos, instalamos e organizamos móveis, estruturas e materiais no ponto de venda. Depois, retiramos e devolvemos.',
+      'Coletamos, transportamos e organizamos os materiais da sua campanha no ponto de venda. Depois, retiramos e devolvemos.',
     photo: photos.positivacao,
     icon: 'store',
     detailsHref: '#positivacao',
@@ -64,7 +64,7 @@ const cards: Card[] = [
     id: 'transporte',
     title: 'Transporte de cargas',
     description:
-      'Cargas fracionadas e fechadas, transporte expresso de mercadorias e envios aéreos por companhias parceiras.',
+      'Cargas fracionadas e fechadas, transporte expresso de mercadorias e envio por modal aéreo quando a carga precisa chegar com rapidez.',
     photo: photos.transporte,
     icon: 'truck',
     detailsHref: '#atuacao',
@@ -85,14 +85,6 @@ const cards: Card[] = [
     photo: photos.armazenagem,
     icon: 'warehouse',
   },
-  {
-    id: 'montagem',
-    title: 'Montagem e instalação',
-    description:
-      'Montamos e instalamos móveis, estruturas e materiais onde você precisar: empresas, lojas, eventos e residências.',
-    photo: photos.montagem,
-    icon: 'tools',
-  },
 ];
 ---
 
@@ -100,9 +92,9 @@ const cards: Card[] = [
   <div class="container">
     <div class="section-head">
       <p class="eyebrow">Nossas soluções</p>
-      <h2 id="solucoes-title">Do transporte à instalação no ponto de venda</h2>
+      <h2 id="solucoes-title">Do transporte à positivação no ponto de venda</h2>
       <p class="lead">
-        Cinco frentes que funcionam sozinhas ou integradas, com uma única equipe responsável pela sua operação.
+        Quatro frentes que funcionam sozinhas ou integradas, com uma única equipe responsável pela sua operação.
       </p>
     </div>
 
@@ -246,7 +238,7 @@ const cards: Card[] = [
   }
   .cards {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
   .card {
@@ -342,7 +334,7 @@ const cards: Card[] = [
     align-items: center;
     gap: 1rem 1.5rem;
   }
-  @media (max-width: 760px) {
+  @media (max-width: 900px) {
     .cards {
       grid-template-columns: 1fr;
     }

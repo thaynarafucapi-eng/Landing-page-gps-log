@@ -61,11 +61,6 @@ export const photos = {
     alt: 'Estrutura promocional temática montada e instalada pela GPSLOG em ponto de venda de atacado',
     pending: 'positivação em PDV (destaque)',
   },
-  montagem: {
-    src: undefined,
-    alt: 'Equipe da GPSLOG montando e instalando estruturas no local do cliente',
-    pending: 'montagem e instalação',
-  },
   veiculos: {
     src: frota,
     alt: 'Frota de veículos brancos da GPSLOG para entregas e transporte',

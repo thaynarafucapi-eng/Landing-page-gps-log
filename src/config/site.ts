@@ -28,11 +28,10 @@ export const company = {
     open: 8,
     close: 17,
   },
-  firstResponse: 'até 2 horas',
   serviceArea: [
     'Manaus e região metropolitana',
     'Interior do Amazonas',
-    'Roraima',
+    'Boa Vista (RR)',
   ],
 } as const;
 
@@ -80,7 +79,6 @@ export const services = [
   { id: 'entregas', label: 'Entregas, coletas e distribuição' },
   { id: 'armazenagem', label: 'Armazenagem de materiais' },
   { id: 'positivacao', label: 'Positivação e negativação' },
-  { id: 'montagem', label: 'Montagem e instalação' },
   { id: 'outro', label: 'Outro / não sei ainda' },
 ] as const;
 
