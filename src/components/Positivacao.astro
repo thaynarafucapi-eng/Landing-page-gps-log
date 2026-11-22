@@ -157,6 +157,11 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
     display: flex;
     flex-direction: column;
     min-width: 0;
+    background: var(--ink-800);
+    border: 1px solid #2c2f34;
+    border-top: 3px solid var(--red);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.1rem 1.25rem;
   }
   .flow__label {
     font-size: 0.8125rem;
@@ -164,9 +169,7 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #ff4d5e;
-    border-left: 3px solid var(--red);
-    padding-left: 0.6rem;
-    margin: 0 0 0.75rem;
+    margin: 0 0 0.9rem;
   }
   .steps {
     flex: 1;
@@ -178,7 +181,7 @@ const venues = ['Lojas', 'Shopping centers', 'Atacadões', 'Drogarias', 'Outros 
     gap: 1px;
     background: #2c2f34;
     border: 1px solid #2c2f34;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius);
     overflow: hidden;
   }
   .steps--neg {
