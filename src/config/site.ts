@@ -29,8 +29,8 @@ export const company = {
     close: 17,
   },
   serviceArea: [
-    'Manaus',
-    'Interior do Amazonas',
+    'Manaus (AM)',
+    'Todo o interior do Amazonas',
     'Boa Vista (RR)',
   ],
 } as const;
