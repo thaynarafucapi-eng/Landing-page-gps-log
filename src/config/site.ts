@@ -29,7 +29,7 @@ export const company = {
     close: 17,
   },
   serviceArea: [
-    'Manaus e região metropolitana',
+    'Manaus',
     'Interior do Amazonas',
     'Boa Vista (RR)',
   ],
